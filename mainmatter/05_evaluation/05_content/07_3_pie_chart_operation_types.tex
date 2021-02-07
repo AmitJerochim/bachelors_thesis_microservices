@@ -1,0 +1,22 @@
+
+\begin{figure}[t]
+    \centering
+        \begin{tikzpicture}
+        \pie[ /tikz/every pin/.style={align=left},
+        sum=auto,
+        radius=3.5,
+        text=pin,
+        color={blue!70,blue!70,blue!70,blue!70,red!70,blue!70},
+        before number=\phantom,
+        after number=]{
+        4706/$\textbf{CREATE}$ \\ (4706 oper. $\vert$ 35.35\%),
+        1860/$\textbf{READ}$ \\ (1860 oper. $\vert$ 13.97\%),
+        1237/$\textbf{SCAN}$ \\ (1237 oper. $\vert$ 9.29\%),
+        1194/$\textbf{UPDATE}$ \\ (1194 oper. $\vert$ 8.97\%),
+        3301/$\textbf{UNDEFINED}$ \\ (3301 oper. $\vert$ 24.80\%),
+        1012/$\textbf{DELETE}$ \\ (1012 oper. $\vert$ 7.60\%)
+        }
+        \end{tikzpicture}
+    \caption{Distribution of the service operations by matched abstract operations}
+    \label{fig:analysis1:pie_chart_shares_of_operation_types}
+\end{figure}

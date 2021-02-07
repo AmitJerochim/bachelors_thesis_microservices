@@ -1,0 +1,18 @@
+\tikzstyle{activity} = [rectangle, rounded corners, text width=6cm, minimum width=6cm, minimum height=1cm,text centered, draw=black, fill=black!5]
+\tikzstyle{startstop} = [circle, rounded corners, text width=1.5cm, minimum width=1cm, minimum height=1cm,text centered, draw=black, fill=black!5]
+
+\tikzstyle{arrow} = [thick,->,>=stealth]
+
+\begin{center}
+    \begin{tikzpicture}[align=center, node distance=2cm]
+        \node (start) [startstop] {n files};
+        \node (mapToList) [activity, below of= start] {Map HTML file to a list of links for each file};
+        \node (filterOAS3) [activity, below of=mapToList] {Remove links of all Swagger 2.0 formatted definitions for each list of links};
+        \node (reduceToFile) [activity, below of=filterOAS3] {Reduce the n lists of links to one file};
+        \node (stop) [startstop, below of=reduceToFile]{1 file};
+        \draw [arrow] (start) -- (mapToList);
+        \draw [arrow] (mapToList) -- (filterOAS3);
+        \draw [arrow] (filterOAS3) -- (reduceToFile);
+        \draw [arrow] (reduceToFile) -- (stop);
+    \end{tikzpicture}
+\end{center}

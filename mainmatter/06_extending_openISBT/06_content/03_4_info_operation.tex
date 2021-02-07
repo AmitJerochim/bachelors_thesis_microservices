@@ -1,0 +1,4 @@
+\subsection{The INFO Abstract Operation}
+This abstract operation describes service operations, which respond with non-persisted data. For example, users' activity status in messaging applications, or social networks, is often visible to other users in real-time. 
+
+A service for retrieving information, persisted or not, should be safe and idempotent. Therefore, we presume the HTTP method to be GET. Additionally, a matching unit should distinguish between persisted and non-persisted service operations. Therefore, we assume that developers use meaningful URIs and match service operations based on the URI semantics. For the sample above, checking the activity of a user could be done by performing GET /users/\{id\}/status where \{id\} is a placeholder for a specific user-id.

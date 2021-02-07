@@ -1,0 +1,39 @@
+\section{Assumptions of the Authors of the Pattern-based Benchmarking Approach}
+\label{sec:discussion_limitations_approach}
+
+The authors rely on the second level of Richardson’s maturity model, which restricts the HTTP methods of a service operation to be as close as possible to how it is used in HTTP itself.
+By observation, we know that openISBT sometimes matches service operations to wrong abstract operations (false-positive errors) because their APIs do not follow the second level of Richardson’s maturity model.
+We also know by observation that false-positive errors occur for most abstract operations occasionally. For CREATE, we observe a significantly higher rate.
+
+To quantify the observation, we design and implement an assumption-based detection tool. We estimate 957 service operations that openISBT matches wrongly to CREATE. We discuss these assumptions and the results in details in appendix \ref{appendix:assumption_based_detection}.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% Depending on the complexity of pattern we want to match REST compliance level two is crucial, which restricts the used HTTP method to be as closely as possible to how it is used in HTTP itself.
+% We assume, that many services in our sample are matched to the wrong abstract operations because they are not REST compliant. Also, we assume occasional false positive matches across all abstract operation. However, we focus on the CREATE block as it is significantly larger than the other blocks and we assume the number of false positive matches in this block not to be only occasionally.
+
+% Detecting those false positive matching is not a trivial task. First, many OAS files use a high variety of languages in the descriptions fields, and many others even do not contain any description, Next, detecting false positive matching based on possible patterns leads to the same problem we try to solve, i.e., we can not guarantee to find only false positive matches and without true positive matches. However, this approach at least allows to determine groups of services with a very high density of false positive matches. 
+
+% We provide an implementation\footnote{\url{https://github.com/AmitJerochim/openISBT_analyser/blob/master/clustering/requestbody_checker_iterator.sh}} of the approach we also used to determine the false positive matches. Below we discuss these patterns and the results.
+
+% \begin{itemize}
+%     \item We make an assumption that in order to create a new resource the client needs to provide a representation of the resource in the body of the request. In reverse, a request without a request body is probably used as a READ, SCAN, or AUTHENTICATE. We find 607 services which do not require a request body, such as POST /getBanks\footnote{\url{https://github.com/AmitJerochim/openapi-data/blob/master/oasFiles/2018_ZAR-Network-api.zar.cloud-0.1.0-swagger.json}} which is matched wrongly. However, the set also contains some services such POST /student/post\footnote{\url{https://github.com/AmitJerochim/openapi-data/blob/master/oasFiles/1542_Repatik-Repatik-1.0.0-oas3-swagger.json}} which is correctly matched and it does not contain POST /getVehicleOwnerContactInfo\footnote{\url{https://github.com/AmitJerochim/openapi-data/blob/master/oasFiles/1666_shivek-automation-rgm-buslane-demo-1.0.0-swagger.json}}
+    
+%     \item For the remaining services with an explicitly defined request body we also check if the definition of each service contains the substring "update" and we determine a set of 316 services such as POST /customer/update\footnote{\url{https://github.com/AmitJerochim/openapi-data/blob/master/oasFiles/1902_vesteliotcloudteam-NativeApi-0.0.11.2-swagger.json}} which is semantically an UPDATE but also few services such as POST /tasks\footnote{\url{https://github.com/AmitJerochim/openapi-data/blob/master/oasFiles/2027_ZID-egov-fa-services-0.0.1-swagger.json}} which is a CREATE operation and therefore correctly matched. 
+    
+%     \item We also determine 40 potential services with a service description containing the substring "delete". A manual investigation shows that 34 of those are semantically DELETE operations and not CREATE operations. 
+% \end{itemize}

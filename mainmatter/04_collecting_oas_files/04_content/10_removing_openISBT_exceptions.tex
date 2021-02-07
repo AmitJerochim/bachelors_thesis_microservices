@@ -1,0 +1,13 @@
+\subsection{Removing OpenAPI Documents That OpenISBT Cannot Handle}
+\label{sec:remove_files_where_exception_is_thrown}
+To evaluate the applicability of openISBT to an arbitrary API, we pass the API description to openISBT and to analyze information that openISBT writes to the standard output. If openISBT cannot process a document without throwing an exception, then the stack trace is written to the standard output. The required output is also incomplete, so we cannot analyze it.
+
+Discarding this document at runtime is crucial, as we make changes to the code of openISBT and then repeat the analysis. Therefore, an arbitrary change to the code can influence the program flow in different ways:
+\begin{enumerate}
+    \item An OpenAPI document that makes openISBT throwing an exception before code change still makes it throwing an exception after a code change.  
+    \item An OpenAPI document that openISBT can handle correctly before code change can still be handled correctly after a code change.  
+    \item An OpenAPI document that makes openISBT throwing an exception before code change can be handled correctly after a code change. 
+    \item An OpenAPI document that openISBT can handle correctly before code change makes openISBT throwing an exception after a code change.   
+\end{enumerate}
+For cases (1) and (2), we can discard the documents once in advance without any disadvantages. For case (3), discarding the document in advance would unnecessarily reduce the sample in subsequent analyses.
+For case (4), discarding the document in advance would lead to wrong results in subsequent analyses, which is critical. 

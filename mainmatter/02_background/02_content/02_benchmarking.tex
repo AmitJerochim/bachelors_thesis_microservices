@@ -1,0 +1,12 @@
+\section{Benchmarking}
+\label{sec:bg_benchmarking}
+An important aspect when providing services is their continuous quality improvement \cite[][p. 28]{Bermbach_Cloud_Service_Benchmarking_2017}. Especially if we consider that microservices' implementations regularly fluctuate, then measuring quality change is crucial.
+
+Each kind of quality describes how good a system is at doing something. Therefore, qualities are the non-functional properties of a system \cite[][p. 17]{Bermbach_Cloud_Service_Benchmarking_2017}. In contrast, the functional properties of a system describe what the system does and not how. Quality itself has many faces, such as availability, performance, security, reliability, scalability, correctness, or cost-efficiency \cite[][p. 19-22]{Bermbach_Cloud_Service_Benchmarking_2017}. Improving one kind of quality may affect other types negatively. For example, increasing security might decrease performance because of additional calculations \cite[][p. 24]{Bermbach_Cloud_Service_Benchmarking_2017}.
+
+Benchmarking is an established approach to measure a system's qualities. When we benchmark a system, we actively put external pressure on it using a workload generator and measure how it can handle this pressure. Monitoring is an alternative approach for measuring a system's qualities. In contradiction to benchmarking, it describes a passive observation of a system that is already in production \cite[][p. 24]{Bermbach_Cloud_Service_Benchmarking_2017}. Benchmarking, however, allows evaluating the system in a controlled experiment before the system is deployed to production, which is crucial for simulating critical situations (e.g., user traffic of an online-shop on Black Friday).
+
+Especially from the client's perspective, the SUT is a black box, and information about the SUT is not available \cite[][p. 11-12]{Bermbach_Cloud_Service_Benchmarking_2017}.  For instance, a microservice's implementation is hidden behind the facade of HTTP. 
+
+\blockquote{Benchmarking in general follows a three-step process of benchmark design, benchmark execution, and dealing with benchmark results} \cite[][p. 14-16]{Bermbach_Cloud_Service_Benchmarking_2017}, whereas the benchmark execution covers aspects regarding the benchmark implementation and experimentation.
+In later chapters and sections, we outline and discuss specific design and implementation objectives that concern our work.

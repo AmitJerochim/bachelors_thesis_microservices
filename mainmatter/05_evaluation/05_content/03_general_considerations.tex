@@ -1,0 +1,25 @@
+\subsection{Requirements and Purposes}
+\label{sec:eval_tool:general_considerations}
+The main purpose of the evaluation tool is to calculate \(p_{operations}\) and \(p_{APIs}\) for a given input of API description files. Algorithm \ref{alg:calc_p_i_for_single_api} shows instructions to calculate \(p_{i}\). Appendix \ref{appendix:algorithms} introduces additional algorithms, which use algorithm \ref{alg:calc_p_i_for_single_api} to calculate \(p_{APIs}\) and \(p_{operations}\).\\
+
+\input{mainmatter/05_evaluation/05_content/03_1_calc_pi_algorithm}
+
+The mathematical considerations behind algorithm \ref{alg:calc_p_i_for_single_api} are not very challenging. Nonetheless, the algorithm introduces a set of undiscussed issues:
+
+\begin{enumerate}
+    \item The tool should handle every set of files, including non-valid OpenAPI files or valid files that do not fulfill specific requirements and discard them. For example, it should determine and discard toy APIs at runtime.
+    \item The OpenAPI specification enables diverse ways to describe the same objects. Considering any possible syntax developers might use in an OpenAPI file adds unwanted complexity to the tool. 
+    \item Concerning our goals, we still focus on the question if there are other undiscovered abstract operations. If low coverage has other reasons than missing matching units, it could wrongly indicate missing abstract operations. Assuming openISBT cannot support a service operation or even a whole document for any other reason, should the evaluation tool either consider or ignore it in the metric's calculation? For example, 
+    \begin{enumerate}
+        \item openISBT does not support service operations on nested resources, also if a suitable abstract operation exists.
+        \item an OpenAPI document might define ignored service operations only. Considering the document but ignoring the service operation in the calculation leads to a paradox increase of the metric \(p_{APIs}\). The reason for this is a division by zero : \(p_i = \frac{|M_i|}{|N_i|} = \frac{0}{0} = 1\).
+        \item openISBT might throw an Exception for a certain OpenAPI document.
+    \end{enumerate}
+    \item How can we systematically discard documents from our sample and keep the remaining sample representative for the statistical population?
+\end{enumerate}
+
+The tool should implement the data cleaning components we describe in section \ref{sec:cleaning_data} to solve these issues.
+Also, it should determine the distribution of abstract operations, and finally, determine the metrics \(p_{operations}\) and \(p_{APIs}\) for two different cases. 
+
+For the first case, the metric should indicate missing abstract operations only, so the tool should ignore some input such as service operations on nested resources. For the second case, the metrics should determine any factor that may affect the applicability. 
+

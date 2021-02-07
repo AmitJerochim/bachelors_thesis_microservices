@@ -1,0 +1,19 @@
+\subsection{Removing Unusual Formatted OpenAPI Documents}
+\label{sec:cleaning_data:remove_unusual_formated_data}
+
+Some of the OpenAPI documents do not fit our requirements, so we discard them. In the following, we introduce two kinds of unwanted documents. 
+
+\subsubsection{Discarding Documents Without a Paths-Object}
+We require an OpenAPI document containing a paths-object for our analysis. Listing \ref{lst:example_suitably_formated_oas_file} shows a minimal example with the required format. Listing \ref{lst:example_unsuitable_but_valid_oas_file} shows an example that SwaggerHub considers as valid but does not contain a paths-object. Therefore, we check for any OpenAPI document if it contains a paths-object, and if not, we discard it.
+
+\input{tab/042_valid_oas_files_example}
+
+\subsubsection{Discarding Documents With General Path-Properties}
+
+
+The OpenAPI 3.0 specification offers different ways to describe the same objects. Therefore, different OpenAPI documents can describe the same API. 
+
+For example, service operations have different predefined properties \cite{OpenAPI_spec_operation_Object} and also might have customized properties \cite{OpenAPI_spec_specification_extentions}. If such a property is identical for all service operations on an endpoint, developers can define it once at the endpoint's root \cite{OpenAPI_spec_path_item_Object} instead of repeating code.
+
+Considering this case would add unwanted complexity to our tool but increase the number of documents we can analyze.
+However, our observations show that most of the public OpenAPI documents only define service operations at the endpoint's root and no other properties. Hence, the added value is not worth adding this complexity. 

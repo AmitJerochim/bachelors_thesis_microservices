@@ -1,0 +1,29 @@
+\begin{figure}[!ht]
+    \centering
+        \begin{lstlisting}[style=htmlcssjs, label=lst:improving_scan_not_working_oas_example, caption=Snippet of an OpenAPI document in YAML defining a service that does not map to SCAN but should do. ,captionpos=b]
+01      ...
+02      "/users":
+03        "get":
+04          "responses":
+05            '200':
+06              "content":
+07                "application/json":
+08                  "schema":
+09                    $ref: '#/components/schemas/Users'
+10        ...            
+11        "components":
+12              "schemas":
+13                "User":
+14                  "type": object
+15                  "properties":
+16                      "name":
+17                        "type": string
+18                "Users":
+19                  "type": array
+20                  "items":
+21                    $ref: '#/components/schemas/User'
+22        ...
+        \end{lstlisting}
+    %\caption{Snippet of a OAS document in YAML defining a service which does not map to SCAN but should do}
+    %\label{fig:improving_scan_not_working_oas_example}
+\end{figure}

@@ -1,0 +1,51 @@
+%!TEX root = ../thesis.tex
+
+\cleardoublepage
+\chapter{Technologies and Concepts of a Larger Context}
+\label{appendix:A}
+\section{Algorithms for the Calculation of Metrics}
+\label{appendix:algorithms}
+Section \ref{sec:eval_tool:deriving_coverage_criteria} introduces new coverage metrics for applicability measurement. This section presents algorithms for their calculation. We use algorithm \ref{alg:calc_p_apis} to calculate the coverage metric $p_{APIs}$ and algorithm \ref{alg:calc_p_operations} to calculate $p_{operations}$. 
+
+In algorithm \ref{alg:calc_p_apis}, we initialize the counter SUPPORTED\_APIS to zero. Then we iterate through all OpenAPI files and check the condition \(p_{i}=1\). If it evaluates to true, then we increment SUPPORTED\_APIS. After the last iteration, we determine and return the quotient between SUPPORTED\_APIS and ALL\_APIS as \(p_{APIs}\). \\
+
+\begin{algorithm}[H]
+\SetKwInOut{Input}{input}
+\SetKwInOut{Output}{output}
+\Input{set of OpenAPI files}
+\Input{pattern configuration file}
+\Output{ \(p_{APIs}\) }
+    ALL\_APIS = number of OpenAPI files\;
+    SUPPORTED\_APIS = 0\;
+    \For{each OpenAPI file}{
+        \(p_{i}\) = calculate \(p_{i}\) \;
+        \If{ \(p_{i}\) = 1}{
+            increment SUPPORTED\_APIS \;  
+        }
+    }
+    \(p_{APIs}\) = SUPPORTED\_APIS divided by ALL\_APIS \;
+ \caption{Calculate \(p_{APIs}\) }
+ \label{alg:calc_p_apis}
+\end{algorithm}
+
+Algorithm \ref{alg:calc_p_operations} iterates over all OpenAPI files as well. It initializes the variable SUM to zero and adds all values of \(p_{i}\) for all OpenAPI files to SUM. Finally, it divides SUM by the number of OpenAPI documents and returns it.
+
+\begin{algorithm}[H]
+\SetKwInOut{Input}{input}
+\SetKwInOut{Output}{output}
+\Input{set of OpenAPI files}
+\Input{pattern configuration file}
+\Output{ \(p_{operations}\) }
+    ALL\_APIS = number of OpenAPI files\;
+    SUM = 0\;
+    \For{each OpenAPI file}{
+        \(p_{i}\) = calculate \(p_{i}\) \;
+        SUM =  SUM + \(p_{i}\) \;  
+    }
+    \(p_{operations}\) = SUM divided by ALL\_APIS \;
+ \caption{Calculate \(p_{operations}\) }
+ \label{alg:calc_p_operations}
+\end{algorithm}
+
+
+

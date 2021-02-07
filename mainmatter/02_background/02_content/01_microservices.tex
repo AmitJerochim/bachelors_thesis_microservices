@@ -1,0 +1,9 @@
+\section{Microservices}
+\label{sec:bg_microservices}
+
+The term microservices describes an architectural style where complex application systems are split into multiple independent, loosely coupled, and deployable services built around business capabilities, which communicate using lightweight mechanisms.
+There is no clear definition for the microservices architectural style, but there are common characteristics they usually share \cite{martin_fowler_microservices}. 
+However, for clients (such as openISBT), most of these characteristics concern hidden aspects, so they are less relevant in this work. For example, decentralized data management is crucial for microservices, although the client cannot observe if multiple services share the same data storage or not.  
+
+The communication between services is, on the other hand, highly relevant in this work. The term "smart endpoints and dumb pipes" \cite{martin_fowler_microservices} describes an approach where complexity is, if required, added to the service itself in order to keep the communication mechanisms as simple as possible. Therefore, the microservices architectural style avoids complex middleware systems such as Enterprise Service Bus  \cite{Enterprise_service_bus} and moves functionality such as business logic or routing to the service itself.
+Microservices use either REST and HTTP or lightweight message brokers to communicate with each other \cite{martin_fowler_microservices}. RabbitMQ\footnote{\url{https://www.rabbitmq.com/}} and ZeroMQ\footnote{\url{https://zeromq.org}} are representants for lightweight message brokers, which use the AMQP\footnote{\url{https://www.amqp.org/}} protocol. However, openISBT can only benchmark REST-based and HTTP-based microservices \cite[][sec. 5]{paper_grambow_benchmarking_microservices}, so we focus on them in this work. Section  \ref{sec:bg_rest_and_http} discusses REST and HTTP in detail. 

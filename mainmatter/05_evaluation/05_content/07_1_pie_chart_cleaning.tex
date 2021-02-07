@@ -1,0 +1,22 @@
+\begin{figure}[t]
+    \centering
+        \begin{tikzpicture}
+        \pie[ 
+        /tikz/every pin/.style={align=left},
+        radius=3.5,
+        sum=auto,
+        text=pin,
+        % color={orange!100,orange!50,yellow!50,cyan!50,blue!50},
+        before number=\phantom, 
+        after number=
+        ]{
+        50/$\textbf{No top-level}$ \\$\textbf{resources}$ \\ (50 APIs $\vert$ 2.42\%),
+        372/$\textbf{Toy APIs}$ \\(372 APIs $\vert$ 17.98\%) ,
+        163/$\textbf{Evaluation tool}$  \\ $\textbf{cannot process}$ \\ (163 APIs $\vert$  7.88\%),
+        303/$\textbf{OpenISBT throws}$ \\$\textbf{an exception}$ (303 APIs $\vert$ 14.64\%),
+        1181/$\textbf{Included in}$ \\ $\textbf{analysis}$ \\ (1181 APIs $\vert$  57.08\%)
+        }
+        \end{tikzpicture}
+    \caption{Distribution of the OpenAPI documents by applied data cleaning components}
+    \label{fig:pie_chart:shares_of_removed_apis_before_extention}
+\end{figure}

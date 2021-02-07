@@ -1,0 +1,4 @@
+\subsection{Setup of the Measurement}
+\label{sec:analysis_1:setup}
+The measurement's setup defines the required input for benchmark execution. First, it requires a specific openISBT version. For this measurement we use openISBT v0.2\footnote{\url{https://github.com/martingrambow/openISBT/releases/tag/v0.2}}, as we want to evaluate the current state. Second, it requires a set of OpenAPI documents\footnote{\url{https://github.com/AmitJerochim/openapi-data}}. Finally, it requires a pattern configuration file. This file defines the abstract interaction patterns. We mention in section \ref{sec:bg_pattern_based_approach} that openISBT defines workload for interaction patterns, which are sequences of abstract operations. 
+However, we require information about supported service operations, so we define in the pattern configuration for each abstract operation an abstract interaction pattern containing only this abstract operation. 

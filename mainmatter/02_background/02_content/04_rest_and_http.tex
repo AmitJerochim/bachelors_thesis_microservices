@@ -1,0 +1,19 @@
+
+\section{Representational State Transfer and the Hypertext Transfer Protocol}
+\label{sec:bg_rest_and_http}
+
+Representational State Transfer (REST) \cite{rest_phdthesis}, the de facto standard when building APIs for microservices \cite{martin_fowler_microservices}, is an architectural style for network-based software and mostly used over the Hypertext Transfer Protocol (HTTP). A set of constraints defines this architectural style. For example,  
+client-server architectural style \cite[][sec. 5.1.2]{rest_phdthesis}, stateless communication between server and client \cite[][sec. 5.1.3]{rest_phdthesis}, cache \cite[][sec. 5.1.4]{rest_phdthesis}, uniform interface \cite[][sec. 5.1.5]{rest_phdthesis}, layered system \cite[][sec. 5.1.6]{rest_phdthesis}, and optionally code-on-demand \cite[][sec. 5.1.7]{rest_phdthesis}. The uniform interface is the most important constraint and covers four subordinated interface constraints.
+
+REST uses the concept of resources to abstract information \cite[][sec. 5.2.1.1]{rest_phdthesis}.   
+The interface constraint \textbf{resource identification in requests} forces the use of resource identifiers such as URI to name resources and representations to describe them \cite[][sec. 5.2.1.2]{rest_phdthesis}. Representations might differ in their media types (e.g., XML, HTML, or JSON), so clients might prefer different representations. Therefore, the constraint \textbf{resource manipulation through representations and content negotiation} is required \cite[][sec. 5.2.1.2]{rest_phdthesis}. Content negotiation means that the client and server should agree on a representation. Also, a representation should contain all required data to modify the resource's state.
+Next, REST forces messages to be \textbf{self-descriptive}. It means that a request contains all information required by the server to process the message. This includes the use of standard methods and media types to indicate semantics \cite[][sec. 5.3.1]{rest_phdthesis}. For HTTP, this also means that the HTTP method chosen should fit the best to the request \cite[][sec. 6.3.3.2]{rest_phdthesis}.
+Finally, representations should contain hypermedia links that indicate possibilities for the client on how to proceed. This is also known as \textbf{Hypermedia as the engine of application state (HATEOAS)} \cite[][sec. 5.2.1]{rest_phdthesis}.
+
+
+
+Richardson's maturity model (RMM) \cite{martin_fowler_richardson_maturity_model} breaks down the principles of REST into three compliance levels. 
+An application that violates all interface constraints is not compliant with REST at all. In order to follow the first level of RMM, the application should introduce resources and use resource identifiers. If requests are also self-descriptive, then the application also follows level two of RMM. Therefore, the second level of RMM forces the use of HTTP methods that fit the best. For example, if the client does not want to change the server's state, it should use HTTP GET. The third level of RMM also forces HATEOAS.
+Roy Fielding clarifies that the third level of RMM is crucial for an API to be RESTful \cite{Fielding_REST_APIs_must_be_hypertext_driven}. 
+However, APIs that follow the second level of RMM are sufficient for the pattern-based approach.
+

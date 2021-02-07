@@ -1,0 +1,6 @@
+\subsection{Processing the Search Results}
+In this step, the web crawler reduces all the collected HTML documents to a list of hypertext links to OpenAPI documents it tries to collect. 
+For each hypertext link in each document, it first checks whether the OpenAPI documents have a Swagger 2.0 format or OpenAPI 3.0 format. If the format is OpenAPI 3.0, the web crawler persists the hypertext link.
+
+To implement it, we make use of jsoup\footnote{\url{https://jsoup.org/}}, a library that allows us to efficiently work with HTML files and make use of CSS selectors.
+The web crawler uses jsoup to parse each HTML document to a DOM. Then it uses CSS selectors to filter all Content Division Elements, i.e., $\langle div \rangle$-container, to a list of HTML-Elements, each containing meta-information about an OpenAPI document such as the hypertext link, the specification, or the owner. It rejects all elements if the format is not OpenAPI 3.0 and persists the hypertext links in the remaining elements in a text file.

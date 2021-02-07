@@ -1,0 +1,7 @@
+\section{Cleaning the Data}
+\label{sec:cleaning_data}
+In the previous section, we mention that the web crawler downloads only valid documents. Nonetheless, additional data cleaning is necessary. Usually, the term data cleaning refers to the process of detecting and correcting or removing corrupt data \cite{data_cleaning}. In this paper, we defiantly define the term as the decision to include a document in our statistics. As we pass a set of documents to our evaluation tool, we use the term of discarding a document from that set as the decision to ignore it when generating the statistics.
+
+In this section, we introduce different cases where discarding documents is necessary or at least recommendable. We explain why we decided to implement the data cleaning modules as part of our evaluation tool and discard unwanted documents at runtime when running each analysis.
+
+In some cases, we postpone the question of why we discard documents to chapter \ref{cha:analyzing_oas_files} as we need to introduce some mathematical considerations first.

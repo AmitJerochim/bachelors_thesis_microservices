@@ -1,0 +1,7 @@
+\subsection{Saving the OpenAPI Documents}
+Finally, the web crawler downloads all valid OpenAPI documents. For each document, it first opens the hypertext link, verifies the document's correctness, and finally downloads a JSON representation of the API description document.
+Again, we use the WebDriver library to request each URL. However, if humans visit any of these pages, they interact with a dynamic website, and the DOM structure depends on users' interactions. 
+We use the awt.Robot library again to trigger mouse and keyboard events such as mouse move, hover, or click. To find DOM elements use CSS selectors provided by the WebDriver library.
+
+To verify the correctness of an OpenAPI document, we rely on SwaggerHubs' own validation. The information, if a document is valid or not, is shown on the page and is therefore also part of the DOM. The web crawler uses CSS selectors to find this information. 
+If a document is valid, the web crawler downloads it. The download hyperlink is not a permanent part of the DOM, so the web crawler navigates through the page as a real user would do in order to trigger different events and change the DOM structure.

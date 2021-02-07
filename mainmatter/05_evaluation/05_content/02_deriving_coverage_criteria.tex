@@ -1,0 +1,48 @@
+
+\subsection{Deriving Metrics to Quantify the Applicability}
+\label{sec:eval_tool:deriving_coverage_criteria}
+To derive metrics, we need to understand  REST APIs as sets of service operations. 
+
+As we mention in section \ref{sec:bg_pattern_based_approach}, openISBT uses matching units to bind abstract operations to service operations based on their properties. 
+If the matching succeeds, then a service operation is supported, and otherwise, the service operation is not supported.
+
+
+Given an arbitrary REST API \(i\), which provides a set \(N_i\) of service operations. \(M_i \subseteq N_i\) is a subset of supported service operations. Then we can state that equation \ref{eq:single_api_operations} shows a suitable metric to describe the coverage of supported service operations for this API.
+
+\begin{equation}
+\label{eq:single_api_operations}
+{p_{i} = \frac{|M_i|}{|N_i|} }
+   \qquad\mathrm{with}\qquad 
+{0 \leq p_{i} \leq 1 }
+\end{equation}
+
+Since we require in a metric to quantify the coverage of supported service operations for a set \(A\) of \(n\) APIs, we need to extend the metric from equation \ref{eq:single_api_operations}.
+Equation \ref{eq:all_apis_operations} shows the extended metric. 
+The numerator \(\sum_{i=1}^{n} |M_i|\) describes the sum of all supported operation across all APIs in \(A\). The denominator \(\sum_{i=1}^{n} |N_i|\) describes the sum of all supported and unsupported operations across all APIs in \(A\).
+
+\begin{equation}
+\label{eq:all_apis_operations}
+{p_{operations} = \frac{\sum_{i=1}^{n} |M_i|}{\sum_{n=1}^{n} |N_i|}}
+   \qquad\mathrm{with}\qquad 
+{0 \leq p_{operations} \leq 1 }
+\end{equation}
+
+
+From an API provider's perspective, who considers integrating openISBT in CI pipelines, \(p_{operations}\)  might not be suitable enough. The API provider requires an estimate if openISBT supports all his service operations, i.e., if \(p_{i}=1\). Even if \(p_{operations}\) is very high, we cannot conclude that an API with \(p_{i}=1\) exists.
+
+Equation \ref{eq:all_full_supported_apis} describes an alternative metric. Given again a set \(A\) of \(n\) APIs, then we state for an API \(i\) that \(M_{i}'=1\) if openISBT supports all its service operations, i.e., if \(p_{i}=1\), or \(M_{i}'=0\) otherwise.
+Then the metric \(p_{APIs}\) describes the ratio of APIs in \(A\) that are fully supported.
+
+\begin{equation}
+\label{eq:all_full_supported_apis}
+{p_{APIs} = \frac{\sum_{i=1}^{n} M_{i}'}{|A|}}
+   \qquad\mathrm{with}\qquad 
+ M_{i}' = \left\{
+  \begin{array}{lr}
+    1 & : p_i = 1\\
+    0 & : p_i < 1
+  \end{array}
+\right.
+   \qquad\mathrm{and}\qquad 
+{0 \leq p_{APIs} \leq 1 }
+\end{equation}

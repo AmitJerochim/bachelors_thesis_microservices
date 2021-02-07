@@ -1,0 +1,39 @@
+\subsection{Searching for APIs}
+After the WebDriver is instantiated and configured, the crawler uses the search functionality of SwaggerHub to get an overview of existing documents. The website also allows refining the search by adding different filter parameters such as type, owner, or a Query \cite{swaggerhub_doc_ui_searching}.
+
+From the client's perspective, the search is an HTTP GET request, i.e., the client performs a GET /search request to the server and refines the requested results by adding the filter parameters as query strings to the path. For instance, to search only for public documents, the HTTP request should be GET /search?visibility=PUBLIC. This example implicitly hints that the values of the query strings are case sensitive. They should be written in capital letters to be processed correctly.
+
+For our experiment, we require open source documents used in production in OAS 3.0 format.
+The example above already filters only public, i.e., open source documents, and we extend it by the parameters specification, type, and state. Table \ref{tab:search_syntax_swaggerhub} shows an overview of all filter parameters we use, including allowed values and explanations.
+We set the specification to OAS 3.0.
+The type parameter allows us to search for APIs only and reject libraries for common components, e.g., a complex data model used in many APIs. Also, we search for published APIs only as we assume that a service provider would not rely on unstable and mutable APIs for services in production.
+\clearpage
+\LTXtable{\textwidth}{tab/031_filter_parameters_swaggerhub}
+
+The request in \ref{eq:searching_req_1} follows all requirements. 
+\begin{multline}
+\label{eq:searching_req_1}
+    GET \qquad /search?spec=OPENAPI3.0\&type=API\&\\state=PUBLISHED\&visibility=PUBLIC
+\end{multline}
+
+
+In fact, the request's response in \ref{eq:searching_req_1} only returns the first ten results that match our pattern, so the request is equal to the request in \ref{eq:searching_req_2}. 
+
+\begin{multline}
+\label{eq:searching_req_2}
+GET \qquad /search?spec=OPENAPI3.0\&type=API\&\\state=PUBLISHED\&visibility=PUBLIC\&page=1    
+\end{multline}
+
+
+Getting more results affords the performance of multiple requests with different values for the page parameter.
+However, SwaggerHub does not process those kinds of requests reliably. For most of the requests, it responses with the required data, but too frequently, we receive an HTTP 504 Gateway Timeout. 
+As SwaggerHub practically always responds with HTTP 200 if the request is easier to process, we simplify the query and perform the request in \ref{eq:searching_req_3} instead:
+   
+\begin{multline}
+\label{eq:searching_req_3}
+  GET \qquad /search?state=PUBLISHED\&visibility=PUBLIC\&\\type=API\&page= \langle page \_ number \rangle  
+\end{multline}
+
+
+
+Therefore, the results set also contains results we do no require, so we shift logic for filtering to our own program. We conclude this step by saving each result, represented by an HTML document to a file.

@@ -1,0 +1,14 @@
+\begin{algorithm}[H]
+\LinesNumbered
+\SetKwInOut{Input}{input}
+\SetKwInOut{Output}{output}
+\Input{OpenAPI file}
+\Input{pattern configuration file}
+\Output{ \(p_{i}\)  }
+    ALL\_OPERATIONS = Count all operations listed in the OpenAPI file\;
+    Try to bind the abstract interaction patterns to service operations in the OpenAPI file\;
+    SUPPORTED\_OPERATIONS = Count the supported operations\;
+    \(p_{i}\) = SUPPORTED\_OPERATIONS divided by ALL\_OPERATIONS 
+ \caption{Calculate coverage metric \(p_{i}\) for a single API \(i\)}
+ \label{alg:calc_p_i_for_single_api}
+\end{algorithm}

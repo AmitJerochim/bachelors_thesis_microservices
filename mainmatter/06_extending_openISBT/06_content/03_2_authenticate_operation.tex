@@ -1,0 +1,7 @@
+\subsection{The AUTHENTICATE Abstract Operation}
+
+Authentication is the act where an entity, e.g., a person or a machine, proves its identity to another entity. 
+We notice that common authentication mechanisms in the WWW follow specific standards, such as \cite{RFC7235_http_authentication, RFC6750_bearer, RFC7617_basic_auth, RFC6265_cookies, RFC7519_jwt_token}. Since HTTP and REST are stateless, the client authenticates itself with each request. Defining an abstract operation only for authentication seems questionable. For example, a service operation, which matches SCAN, might require an authorization header field \cite{OpenAPI_spec_authentication}. However, the authorization header contains credentials \cite{RFC7235_http_authentication}, e.g., a JWT token \cite{RFC7519_jwt_token}, and clients require service operations to request credentials, e.g., GET /login.
+
+We implement a matching unit, which checks if the response body contains an access token. Also, the service operation should use HTTP GET, as the request should not change the server's state.
+

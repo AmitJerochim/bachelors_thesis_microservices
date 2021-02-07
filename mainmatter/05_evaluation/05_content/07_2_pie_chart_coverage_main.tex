@@ -1,0 +1,58 @@
+\begin{figure}
+\centering
+\begin{subfigure}[t]{.48\textwidth}
+  \centering
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%% OPERATIONS %%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    \begin{tikzpicture}
+        \pie[ 
+            /tikz/every pin/.style={align=left},
+            sum=auto,
+            radius=2,
+            text=pin,
+            rotate=70 ,
+            % before number=\phantom,
+            % after number=,
+            color={red!70,blue!70}
+            ]{
+            3301/$\textbf{Not supported}$\\ (24.8\%),
+            10009/$\textbf{Supported}$\\ (75.2\%)
+            }
+    \end{tikzpicture}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+  \caption{OpenISBT matches 10009 of 13310 operations across all APIs.}
+  \label{fig:analysis1_sub_pie_coverage_sup_operations_main}
+\end{subfigure}%
+\hfill
+\begin{subfigure}[t]{.48\textwidth}
+  \centering
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%% APIs %%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    \begin{tikzpicture}
+        \pie[ 
+            /tikz/every pin/.style={align=left},
+            sum=auto,
+            radius=2,
+            text=pin,
+            % before number=\phantom,
+            % after number=,
+            color={red!70,blue!70}
+            ]{
+            692/$\textbf{Not fully}$ \\$\textbf{supported}$ \\ (58.6\%),
+            489/$\textbf{Fully supported}$\\ (41.4\%)
+            }
+    \end{tikzpicture}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+  \caption{For 489 of 1181 APIs openISBT matches all operations on top-level resources.}
+  \label{fig:analysis1_sub_pie_coverage_full_sup_apis_main}
+\end{subfigure}%
+%\caption{Both coverages we determined for a set of 1181 APIs and 13310 operations}
+\caption{Coverage metrics for a set of 1181 OpenAPI documents including 13310 service operations}
+\label{fig:analysis1_pie_both_criteria_main}
+\end{figure}

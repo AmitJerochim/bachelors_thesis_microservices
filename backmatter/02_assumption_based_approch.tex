@@ -1,0 +1,16 @@
+\cleardoublepage
+\section{Detection of False-positive Errors of the CREATE Matching Unit}
+\label{appendix:assumption_based_detection}
+
+
+To determine the number of false-positive errors, we implement an assumption-based detection tool\footnote{\url{https://github.com/AmitJerochim/openISBT_analyser/blob/master/clustering/requestbody_checker_iterator.sh}}.
+Detecting these errors is difficult. Many OpenAPI documents include various languages in descriptions fields, and many others even do not contain any description. 
+Next, openISBT produces false-positive errors because we make assumptions when designing matching units. Making more assumptions to detect these errors probably leads to new errors. First, we might wrongly detect true-positive results, and second, we might miss false-positive errors. However, we only use this tool to estimate the number of false-positive errors. 
+
+First, we assume that to create a new resource, the client needs to provide a representation of the resource in the request body. In reverse, a request without a request body is probably used as a READ, SCAN, or AUTHENTICATE. The tool detects 607 service operations that do not require a request body.
+OpenISBT matches many of them wrongly (e.g., POST /getBanks\footnote{\url{https://github.com/AmitJerochim/openapi-data/blob/master/oasFiles/2018_ZAR-Network-api.zar.cloud-0.1.0-swagger.json}}).
+However, the tool also detects correctly matched operations (e.g., POST /student/post\footnote{\url{https://github.com/AmitJerochim/openapi-data/blob/master/oasFiles/1542_Repatik-Repatik-1.0.0-oas3-swagger.json}}). It also does not detect all false-positive errors (e.g, POST /getVehicleOwnerContactInfo\footnote{\url{https://github.com/AmitJerochim/openapi-data/blob/master/oasFiles/1666_shivek-automation-rgm-buslane-demo-1.0.0-swagger.json}}).
+    
+For the remaining service operations with an explicitly defined request body, we check if the substring "update" appears in the operation definition. We determine 316 services, and most of them are used to update resources (e.g., POST /customer/update\footnote{\url{https://github.com/AmitJerochim/openapi-data/blob/master/oasFiles/1902_vesteliotcloudteam-NativeApi-0.0.11.2-swagger.json}}). We also find a few correctly matched service operations (e.g., POST /tasks\footnote{\url{https://github.com/AmitJerochim/openapi-data/blob/master/oasFiles/2027_ZID-egov-fa-services-0.0.1-swagger.json}}).
+
+Using the same approach but searching for "delete" instead of "update", we determine 40 possible service operations. We know by observation that exactly 34 of them semantically should be matched to DELETE.

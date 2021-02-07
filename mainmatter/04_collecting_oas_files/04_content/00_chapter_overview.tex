@@ -1,0 +1,6 @@
+
+
+Since openISBT has only been evaluated with a few toy services, the first goal is to evaluate its applicability with a large number of services used in production. 
+
+Therefore, we first require a set of OpenAPI documents, so we have to collect and clean them. Both steps, the collecting as well as the cleaning of the data, happen fully automated. Therefore, in this chapter, we explain the design and functionality of different tools we implement to collect and clean the data. In section \ref{sec:designing_a_web_crawler} we present the design of our web crawler. In section \ref{sec:cleaning_data} we introduce different cleaning criteria and explain why subsequent data cleaning is necessary even if the web crawler supplies only valid OAS 3.0 documents.
+We also explain why we integrate our cleaning modules as part of the evaluation tool and clean the data at runtime during each analysis. 

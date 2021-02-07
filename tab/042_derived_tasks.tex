@@ -1,0 +1,61 @@
+
+\begin{longtable}{ m{3cm} | m{11.5cm}}
+\caption{Modules and their tasks} 
+\label{tab:derived_tasks} \\
+
+\multicolumn{1}{c}{\textbf{Category}} & 
+\multicolumn{1}{c}{\textbf{Tasks}} \\
+
+\toprule
+\endfirsthead
+
+\multicolumn{2}{c}%
+{\tablename\ \thetable{} -- continued from previous page} \\ 
+\multicolumn{1}{c}{\textbf{Category}} &
+\multicolumn{1}{c}{\textbf{Tasks}}
+\\
+\toprule
+\endhead
+
+\midrule
+\multicolumn{2}{r}{{Continued on next page}} \\
+\endfoot
+
+\bottomrule
+\endlastfoot
+Pre-Binding-Tasks &
+Before our tool can do the binding there are several cleaning and transforming steps to be done. 
+\begin{itemize}
+    \item \textbf {Discard non-production OAS files:} As we want to analyse only APIs used in production we have to remove all other APIs before doing our analysis , what as a matter of fact would result in a manual research and investigation for each file. As this seems to be infeasible for large sets we needed find criteria to implement automated discarding to at least reduce non-production data. We made a hard assumption that short OAS file is probably not used in production. This approach results in a trade-off as we on the one hand might discard small APIs used in production but on the other hand might miss out non-production APIs. Nonetheless, we decided that reducing our    
+    \item read the files and save a file summary in a file
+    \item remove unreadable files
+\end{itemize} 
+\\
+\hline
+Binding &
+\begin{itemize}
+    \item bind log the files, catch error and associate errors to files
+\end{itemize} 
+\\
+\hline
+Post-Binding-Tasks &
+\begin{itemize}
+    \item remove files that caused errors from the set of files we want to evaluates
+    \item remove sample files. This could also be done in the pre-binding-phase but it's way easier to do it in the post-binding-phase.
+\end{itemize} 
+\\
+\hline
+Main analysis &
+\begin{itemize}
+    \item coverage criteria1: analyse the log files analyse the api. log result of both and do the maths
+    \item coverage criteria2 analyse the log files analyse the api. log result of both and do the maths
+\end{itemize}
+\\ 
+\hline
+Additional Analysis & 
+\begin{itemize}
+    \item count operations in file that threw exception 
+    \item count operations in files that only define subresources
+\end{itemize} 
+\\
+\end{longtable}

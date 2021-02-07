@@ -1,0 +1,5 @@
+
+\subsection{Discarding Documents That Only Define Operations on Nested Resources} 
+In REST, each resource stands on its own and is addressable behind a URI. Also, the relationship between resources is not defined by their URIs but by their hypermedia links. However, several implementations use the concept of sub-resources in their routing mechanisms. For instance, Rails\footnote{\url{https://guides.rubyonrails.org/routing.html\#nested-resources}} or JAX-RS\footnote{\url{https://docs.jboss.org/resteasy/docs/1.0.1.GA/userguide/html/JAX-RS_Resource_Locators_and_Sub_Resources.html}}.
+
+OpenISBT also relies on the concept of sub-resources but can not match services on them yet, so we can not implement an abstract operation that would match them. Chapter \ref{cha:analyzing_oas_files} shows that keeping documents that only define operations on sub-resources leads to a wrong determination of higher applicability.

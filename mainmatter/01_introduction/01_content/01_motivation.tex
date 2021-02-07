@@ -1,0 +1,8 @@
+\section{Motivation \& Problem Description}
+\label{sec:motivation}
+When designing and implementing services, continuous quality improvement plays a central role \cite[][p. 28]{Bermbach_Cloud_Service_Benchmarking_2017}. Herein quality describes how good a service is at a specific ability, e.g., how secure or scalable\cite[][p. 17]{Bermbach_Cloud_Service_Benchmarking_2017}. Therefore, the service provider can rely on benchmarking techniques to ensure quality improvement. 
+Usually, a benchmark has to be designed for every service and maintained with every service version \cite[][sec. 1]{paper_grambow_benchmarking_microservices}. The pattern-based benchmarking approach enables the reuse of benchmarks \cite{paper_grambow_benchmarking_microservices}. However, there are still open questions:
+\begin{enumerate}
+\item The approach has only been evaluated with a few toy services. It is unknown whether this approach is applicable for all REST compliant microservices in production and, if not, the proportion of services it is applicable for is unknown.
+\item The authors also only define abstract operations that map to CRUD operations. Some APIs implement uncovered service operations such as GET /validatePhone, GET /login, or GET /purchase, which openISBT cannot map to the currently defined abstract operations. We assume more abstract operations, such as methods for authentication, validation, or triggering business processes. It is unknown whether real-world microservices require additional abstract operations and how frequently openISBT would map them.
+\end{enumerate}

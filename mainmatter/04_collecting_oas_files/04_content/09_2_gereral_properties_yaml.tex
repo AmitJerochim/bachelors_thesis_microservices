@@ -1,0 +1,25 @@
+\begin{figure}[t]
+    \centering
+        \begin{lstlisting}[style=htmlcssjs, label=lst:cleaning_data:general_path_properties, caption=Snippet of a OAS document in YAML defining the same description and summary once for all services on the /users endpoint ,captionpos=b]
+01      ...
+02    paths:
+03      /users:
+04        summary: "Lorem ipsum"
+05        description: "Lorem ipsum dolor sit amet"
+06        get:
+07          responses:
+08            '200':
+09              $ref: '#/components/responses/OK1'
+10        post:
+11          responses:
+12            '200':
+13              $ref: '#/components/responses/OK2'
+14        put:
+15          responses:
+16            '200':
+17              $ref: '#/components/responses/OK3'
+18      ...
+        \end{lstlisting}
+    %\caption{Snippet of a OAS document in YAML defining the same description and summary once for all services on the /users endpoint}
+    %\label{fig:cleaning_data:general_path_properties}
+\end{figure}

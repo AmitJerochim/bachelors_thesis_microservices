@@ -1,0 +1,14 @@
+\section{Interface Description}
+\label{sec:background_open_api}
+
+An application programming interface (API) defines interactions between multiple software components on a source code level. If components do not understand each other's source code, then they first have to agree on a common language. A language that describes interfaces is called interface description language (IDL). There are different language-independent standards, such as Web Services Description Language\footnote{\url{https://www.w3.org/TR/2007/REC-wsdl20-20070626/}}, Android Interface Definition Language\footnote{\url{https://developer.android.com/guide/components/aidl}}, or COBRA IDL\footnote{\url{https://www.corba.org/omg_idl.htm}}. 
+
+
+There are also common interface description languages for REST-based and HTTP-based APIs, such as RAML\footnote{\url{https://raml.org/}}, API Blueprint\footnote{\url{https://apiblueprint.org/}}, or OpenAPI\footnote{\url{https://swagger.io/specification/}}.
+In this work, we focus on the OpenAPI Specification (OAS). It allows describing services without access to the source code or inspection of the network traffic. A document describing a specific API is called an OpenAPI document and is both human-readable and machine-readable. It also contains all information required to call any service operation and to process its response. We also use different tools that are available around the specification, such as SwaggerHub, a collaborative platform for designing and documenting APIs, or the Swagger Editor, a dedicated editor for OpenAPI documents with an integrated validation functionality. 
+
+
+The content of an OpenAPI document is separable from its syntax. The specification allows the use of either YAML or JSON to describe the same content. As openISBT can only handle JSON formatted OpenAPI documents, we only use JSON files in our work. However, since YAML is better readable for humans than JSON, we use mainly YAML to illustrate examples.
+
+
+In chapter \ref{cha:related_work}, we discuss the potential extendability of openISBT for handling AsyncAPI\footnote{\url{https://www.asyncapi.com/}}. This IDL was discussed in the last year to become an industry standard \cite{AsyncAPI_industry_standard} and can be used for microservices based on RabbitMQ or other asynchronous APIs. 

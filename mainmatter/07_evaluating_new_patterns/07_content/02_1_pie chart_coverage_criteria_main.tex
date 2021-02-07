@@ -1,0 +1,57 @@
+\begin{figure}[!hb]
+\centering
+\begin{subfigure}[t]{.48\textwidth}
+  \centering
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%% OPERATIONS %%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    \begin{tikzpicture}
+        \pie[ 
+            /tikz/every pin/.style={align=left},
+            sum=auto,
+            radius=2,
+            text=pin,
+            rotate=70 ,
+            % before number=\phantom,
+            % after number=,
+            color={red!70,blue!70}
+            ]{
+            2336/$\textbf{Not supported}$\\ (17.7\%),
+            10897/$\textbf{Supported}$\\ (82.3\%)
+            }
+    \end{tikzpicture}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+  \caption{OpenISBT matches 10897 of 13233 operations across all APIs.}
+  \label{fig:analysis2_sub_pie_coverage_sup_operations_main}
+\end{subfigure}%
+\hfill
+\begin{subfigure}[t]{.48\textwidth}
+  \centering
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%% APIs %%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    \begin{tikzpicture}
+        \pie[
+            /tikz/every pin/.style={align=left},
+            sum=auto,
+            radius=2,
+            text=pin,
+            % before number=\phantom,
+            % after number=,
+            color={red!70,blue!70}
+            ]{
+            600/$\textbf{Not fully}$ \\$\textbf{supported}$ \\ (51.2\%),
+            572/$\textbf{Fully supported}$\\ (48.8\%)
+            }
+    \end{tikzpicture}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+  \caption{For 572 of 1172 APIs openISBT matches all service operations on top-level resources.}
+  \label{fig:analysis2_sub_pie_coverage_full_sup_apis_main}
+\end{subfigure}%
+\caption{Coverage metrics determined in the second measurement}
+\label{fig:analysis2_pie_both_criteria_main}
+\end{figure}

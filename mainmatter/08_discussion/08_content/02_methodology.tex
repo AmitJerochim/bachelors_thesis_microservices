@@ -1,0 +1,15 @@
+
+
+\section{Considerations About the Methodology of the Experiment}
+\label{sec:discussion_limitations_methodology}
+
+This section reviews our experiment's methodology and design and discusses critical decisions and assumptions we make in this work.
+
+\paragraph{Assumptions about toy APIs}
+We remove 372 OpenAPI documents from the sample because they describe toy APIs. We know that 75 OpenAPI documents indeed describe toy APIs, but for the other 297, we only know that they have less than 100 LOC. We assume that service providers do not use interface descriptions with few details in real-world applications and risk removing required documents and keeping unwanted documents. 
+
+\paragraph{Assumption about OpenAPI documents that cause exceptions}
+Section \ref{sec:analysis1:larger_context_of_applicability} discusses the impact of poor exception handling in openISBT on portability and presents a significantly lower coverage of supported service operations. We consider all service operations of an OpenAPI document as unsupported if openISBT throws an exception during this document's processing. However, we know by observation that OpenAPI documents, which cause exceptions, indeed define supported operations. Nonetheless, counting supported operations in metrics calculation is not feasible. OpenISBT stops working if an exception is thrown. Therefore, the log files do not show eventually supported service operations.  
+
+\paragraph{Comparison of ratios from different subsets of the sample}
+If openISBT throws an exception during the processing of an OpenAPI document, we remove this document. As different versions of openISBT might throw different exceptions, the subset of removed documents differs for each version's measurement. Therefore, we compare metrics for samples of different sizes. As we only compare relative means, we rely on the central limit theorem and reasonably large sample sizes \cite{central_limit_theorem}.

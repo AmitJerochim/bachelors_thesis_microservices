@@ -1,0 +1,236 @@
+
+\tikzset{
+    io/.style={
+    trapezium,
+    trapezium left angle=70,
+    trapezium right angle=110,
+    minimum width=2cm,
+    minimum height=0.7cm,
+    text width=2.3cm,
+    text centered,
+    draw=black,
+    fill=blue!30
+    },
+    module/.style={
+    rectangle,
+    draw=black,
+    minimum width=3cm,
+    minimum height=0.7cm,
+    text centered,
+    text width=3cm,
+    draw=black,
+    fill=orange!30
+    },
+    box/.style={
+    rectangle,
+    draw=black,
+    minimum width=4cm,
+    minimum height=7cm,
+   % text centered,
+    text width=3.5cm,
+    draw=black,
+    very thick
+    },
+    mainFrame/.style={
+        rectangle,
+        rounded corners,
+        minimum width=10cm,
+        minimum height=17cm,
+       % text centered,
+        text width=3.5cm,
+        draw=black,
+        %very thin
+    },
+    cleaningFrame/.style={
+        rectangle,
+        rounded corners,
+        minimum width=4cm,
+        minimum height=15cm,
+       % text centered,
+        text width=3.5cm,
+        draw=black!50,
+        dashed
+        %very thin
+    },
+    nodejsFrame/.style={
+        rectangle,
+        rounded corners,
+        minimum width=4cm,
+        minimum height=5cm,
+       % text centered,
+        text width=3.5cm,
+        draw=black!50,
+        dashed
+        %very thin
+    },
+    analyserFrame/.style={
+        rectangle,
+        rounded corners,
+        minimum width=4cm,
+        minimum height=5cm,
+       % text centered,
+        text width=3.5cm,
+        draw=black!50,
+        dashed
+        %very thin
+    },
+    openISBTFrame/.style={
+        rectangle,
+        rounded corners,
+        minimum width=4cm,
+        minimum height=3cm,
+       % text centered,
+        text width=3.5cm,
+        draw=black!50,
+        dashed
+        %very thin
+    },
+    start/.style={
+    circle,
+    draw=black,
+    minimum size=0.7cm,
+    very thick
+    },
+    stop/.style={
+    circle,
+    draw=black,
+    minimum size=0.7cm,
+    fill=black,
+    very thick
+    },
+    empty/.style={
+    circle,
+    %draw=black
+    }
+}
+
+\begin{figure}
+\hspace*{-2cm}
+    \centering
+       \begin{tikzpicture}
+%%%%%%%%    legend
+        \node[box] at (12.5,7){};
+        \node at (12.5,10) {legend:};
+        \node[io] (legend io) at (12.5,7) {input/output};
+        \node[module] (module) at (12.5,6) {filter};
+        \node[start] at (11.5,9){};
+        \node at (12.5,9) {start};
+        \node at (12.5,8) {finish};
+        \node[stop] at (11.5,8){};
+        \path[->, dashed] (11,5) edge node[above]{data flow} (14,5);
+        \path[->] (11,4) edge node[above]{program flow} (14,4);
+        
+        
+%%%%%%%%    workflow
+        \node[empty] (empty) at (-3,0){};
+        \node[empty] (empty) at (15,0){};
+        \node[mainFrame] at (5,0){};
+        \node[start] (start) at (4.8,10){};
+        \node[text=black] at (1.5,8.3) {evaluation tool};
+        \node[stop] (stop)at (4.8,-10){};
+        
+        
+%%%%%%%%    cleaning modules
+        \node[cleaningFrame] (cleaningFrame) at (2.3,0){};
+        %\node at (2,7.3) {cleaning modules};
+
+        \node[text=black!50] at (2,7.3) {cleaning filters};        
+        \node[module] (rm_short) at(2.2,6){remove too short files \\[-2mm]};
+        
+        \node[module] (rm_subresources) at(2.2,2.7){\scriptsize  remove files that not define top-level resources \\[-2mm]} ;
+        
+        \node[module] (rm_nonprocessable) at(2.2,0.3){\scriptsize remove files with valid structure that we cannot process \\[-2mm]} ;
+
+        \node[module] (rm_errors) at(2.2,-6){\scriptsize remove files that cause exceptions in openISBT \\[-2mm]};
+        
+        \node[module] (rm_sample) at(2.2,-3.5){remove sample files};
+        
+%%%%%%%%    input output files
+        \node[io] (oas_files1) at (-2,6) {OAS files};
+        \node[io] (txt_files) at (-2,3.5) {\scriptsize lightweight IDL format\\[-2mm]};
+        
+        \node[io] (oas_files2) at (12,0) {OAS files};
+        \node[io] (errors_log) at (12,-1.2) {errors.log};
+        
+        \node[io] (openISBTLogs1) at (-2.3,-1.5) {\scriptsize openISBT logs};
+        \node[io] (openISBTLogs2) at (12.3,-2.8) {\scriptsize openISBT logs};
+        \node[io] (txt_files2) at (12,-6.2) {\scriptsize  lightweight IDL format\\[-2mm]};
+        \node[io] (statistics) at (12,-7.3) {statistics};   
+%%%%%%%%%   nodejs frame and modules
+        \node[nodejsFrame] (jsFrame) at (7.3,3.9){};
+        \node[text=black!50, align=left] at (7.3,5.8) {OAS documents \\[-3mm] processing filters};
+        \node[module] (reduceInfo) at (7.3,4.5){\scriptsize create lightweight representation of API descriptions \\[-2mm]};
+        \node[module] (ops_clustering) at (7.3,2.5){clustering filters};
+
+%%%%%%%%    openISBT modules
+        \node[openISBTFrame] (openISBTFrame) at (7.3,-0.9){};
+        \node[text=black!50] at (7.3,0.3) {openISBT wrapper};
+
+        \node[module] (openisbt_runner) at (7.3,-1.2){openISBT runner};
+        
+%%%%%%%%%   analyser modules
+        \node[analyserFrame] (analyserFrame) at (7.3,-5.5){};
+        \node[text=black!50] at (7.3,-3.3) {calculation filters};
+        \node[module] (calc_metrics) at (7.3,-4.3){\scriptsize determine metrics for each file \\[-2mm]};
+        \node[module] (analyse_discarded) at (7.3,-5.8){\scriptsize determine distribution \\[-2mm]};
+        \node[module] (summarize) at (7.3,-7.3){\scriptsize aggregate results};
+
+%%%%%%%%    arrows
+        \draw[rounded corners=5pt,very thick, ->, dashed] (oas_files1)--(rm_short);   
+        
+        \draw[rounded corners=5pt,very thick, ->] (start)|-(rm_short);   
+        
+        \draw[rounded corners=5pt,very thick, ->] (rm_short)|-([yshift=0.3cm]reduceInfo.west);
+        
+        \draw[rounded corners=5pt,very thick, ->, dashed] ([yshift=-0.3cm]reduceInfo.west)-|(txt_files.north);
+        
+        \draw[rounded corners=5pt,very thick, ->] (reduceInfo.west)-|(rm_subresources.north);
+        
+        \draw[rounded corners=5pt,very thick, ->] (rm_subresources)--(rm_nonprocessable);
+        
+        \draw[rounded corners=5pt,very thick, ->, dashed] ([xshift=1cm]txt_files)|-(rm_subresources);  
+        
+        \draw[rounded corners=5pt,very thick, ->, dashed] ([xshift=-1cm]txt_files)|-(rm_nonprocessable);  
+        
+        \draw[rounded corners=5pt,very thick, ->] (rm_nonprocessable)|-([yshift=0.3cm]openisbt_runner.west);   
+        
+        \draw[rounded corners=5pt,very thick, ->,dashed] ([yshift=-0.2cm]oas_files2)-|(openisbt_runner);   
+        
+        \draw[rounded corners=5pt,very thick, ->,dashed] ([yshift=0.2cm]oas_files2.west)--(9.7,0.2)|-(reduceInfo.east);  
+        
+        \draw[, rounded corners=5pt,very thick, ->,dashed] (openisbt_runner)--(errors_log);   
+        
+        \draw[rounded corners=5pt,very thick, ->,dashed] ([yshift=-0.3cm]openisbt_runner.west)--(openISBTLogs1.east);
+        
+        \draw[rounded corners=5pt,very thick, ->,dashed] (openisbt_runner.south)|-(openISBTLogs2.west);
+        
+        \draw[rounded corners=5pt,very thick, ->,dashed] (openISBTLogs2.south)|-([yshift=0.1cm]calc_metrics.east);
+        
+        \draw[rounded corners=5pt,very thick, ->,dashed] (txt_files2.north)|-([yshift=-0.1cm]calc_metrics.east);
+        
+        \draw[rounded corners=5pt,very thick, ->,dashed] ([xshift=-0.5cm]openISBTLogs1.south)|-(rm_errors);
+        
+        \draw[rounded corners=5pt,very thick, ->,dashed] ([xshift=2cm]openISBTLogs1)|-(rm_sample);
+        
+        \draw[rounded corners=5pt,very thick, ->] (openisbt_runner.west)-|(rm_sample.north);
+        
+        \draw[rounded corners=5pt,very thick, ->] (rm_sample.south)-|(rm_errors.north);
+        
+       \draw[rounded corners=5pt,very thick, ->] (rm_errors.east)-|(4.8,-4.3)--(calc_metrics.west);
+  
+       \draw[rounded corners=5pt,very thick, ->] (calc_metrics)--(analyse_discarded);
+
+       %\draw[rounded corners=5pt,very thick, ->,dashed] (txt_files2)--(analyse_discarded); 
+
+       \draw[rounded corners=5pt,very thick, ->,dashed] ([xshift=-1.2cm]openISBTLogs2.south)|-([yshift=0.5cm]analyse_discarded); 
+
+       \draw[rounded corners=5pt,very thick, ->] (analyse_discarded)--(summarize);
+       
+       \draw[rounded corners=5pt,very thick, ->] (summarize)-|(stop); 
+       
+       \draw[rounded corners=5pt,very thick, ->, dashed] (summarize)--(statistics);         
+    \end{tikzpicture}
+    
+    \caption{Architecture of the Evaluation Tool}
+    \label{fig:architecture_of_eval_tool}
+\end{figure}

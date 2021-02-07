@@ -1,0 +1,415 @@
+
+%!TEX root = ../thesis.tex
+
+\cleardoublepage
+\chapter{Listings}
+\label{app:listings}
+
+This is the appendix for code, that does not need to be provided directly inside the thesis.
+
+\section{Configuration for Node A}
+
+\begin{figure}[!ht]
+    \centering
+        \begin{lstlisting}[style=htmlcssjs, label=lst:pattern_config_file_unextended, caption=pattern configuration for the first measurement execution ,captionpos=b]
+{
+  "totalPatternRequests": 100,
+  "patterns": [
+    {
+      "name": "CRE",
+      "sequence": [
+        {
+          "operation": "CREATE",
+          "output": "item",
+          "wait": 15
+        }
+      ],{
+  "totalPatternRequests": 100,
+  "patterns": [
+    {
+      "name": "CTL",
+      "sequence": [
+        {
+          "operation": "CONTROL",
+          "output": "item",
+          "wait": 15
+        }
+      ],
+      "weight": 25
+    },
+    {
+      "name": "INF",
+      "sequence": [
+        {
+          "operation": "INFO",
+          "output": "item",
+          "wait": 15
+        }
+      ],
+      "weight": 25
+    },
+    {
+      "name": "CRE",
+      "sequence": [
+        {
+          "operation": "CREATE",
+          "output": "item",
+          "wait": 15
+        }
+      ],
+      "weight": 25
+    },
+		{
+      "name": "REA",
+      "sequence": [
+        {
+          "operation": "READ",
+          "input": "item",
+          "output": "item",
+          "wait": 15
+        }
+      ],
+      "weight": 25
+    },
+		{
+      "name": "AUTH",
+      "sequence": [
+        {
+          "operation": "AUTHENTICATE",
+          "input": "item",
+          "output": "item",
+          "wait": 15
+        }
+      ],
+      "weight": 25
+    },
+		{
+      "name": "VAL",
+      "sequence": [
+        {
+          "operation": "VALIDATE",
+          "input": "item",
+          "output": "item",
+          "wait": 15
+        }
+      ],
+      "weight": 25
+    },
+
+    {
+      "name": "LST",
+      "sequence": [
+        {
+          "operation": "SCAN",
+          "output": "resourceList",
+          "wait": 15
+        }
+     ],
+      "weight": 25
+    },
+		{
+      "name": " UPD",
+      "sequence": [
+        {
+          "operation": "UPDATE",
+          "input": "item",
+          "wait": 5
+        }
+      ],
+      "weight": 25
+    },
+    {
+      "name": "DEL",
+      "sequence": [
+        {
+          "operation": "DELETE",
+          "input": "item",
+          "wait": 5
+        }
+      ],
+      "weight": 25
+    }],
+
+  "manualDecision": true
+}
+      "weight": 25
+    },
+		{
+      "name": "REA",
+      "sequence": [
+        {
+          "operation": "READ",
+          "input": "item",
+          "output": "item",
+          "wait": 15
+        }
+      ],
+      "weight": 25
+    },
+    {
+      "name": "LST",
+      "sequence": [
+        {
+          "operation": "SCAN",
+          "output": "resourceList",
+          "wait": 15
+        }
+     ],
+      "weight": 25
+    },
+		{
+      "name": " UPD",
+      "sequence": [
+        {
+          "operation": "UPDATE",
+          "input": "item",
+          "wait": 5
+        }
+      ],
+      "weight": 25
+    },{
+  "totalPatternRequests": 100,
+  "patterns": [
+    {
+      "name": "CTL",
+      "sequence": [
+        {
+          "operation": "CONTROL",
+          "output": "item",
+          "wait": 15
+        }
+      ],
+      "weight": 25
+    },
+    {
+      "name": "INF",
+      "sequence": [
+        {
+          "operation": "INFO",
+          "output": "item",
+          "wait": 15
+        }
+      ],
+      "weight": 25
+    },
+
+
+    {
+      "name": "CRE",
+      "sequence": [
+        {
+          "operation": "CREATE",
+          "output": "item",
+          "wait": 15
+        }
+      ],
+      "weight": 25
+    },
+		{
+      "name": "REA",
+      "sequence": [
+        {
+          "operation": "READ",
+          "input": "item",
+          "output": "item",
+          "wait": 15
+        }
+      ],
+      "weight": 25
+    },
+		{
+      "name": "AUTH",
+      "sequence": [
+        {
+          "operation": "AUTHENTICATE",
+          "input": "item",
+          "output": "item",
+          "wait": 15
+        }
+      ],
+      "weight": 25
+    },
+		{
+      "name": "VAL",
+      "sequence": [
+        {
+          "operation": "VALIDATE",
+          "input": "item",
+          "output": "item",
+          "wait": 15
+        }
+      ],
+      "weight": 25
+    },
+
+    {
+      "name": "LST",
+      "sequence": [
+        {
+          "operation": "SCAN",
+          "output": "resourceList",
+          "wait": 15
+        }
+     ],
+      "weight": 25
+    },
+		{
+      "name": " UPD",
+      "sequence": [
+        {
+          "operation": "UPDATE",
+          "input": "item",
+          "wait": 5
+        }
+      ],
+      "weight": 25
+    },
+    {
+      "name": "DEL",
+      "sequence": [
+        {
+          "operation": "DELETE",
+          "input": "item",
+          "wait": 5
+        }
+      ],
+      "weight": 25
+    }],
+
+  "manualDecision": true
+}
+    {
+      "name": "DEL",
+      "sequence": [
+        {
+          "operation": "DELETE",
+          "input": "item",
+          "wait": 5
+        }
+      ],
+      "weight": 25
+    }],
+
+  "manualDecision": true
+}
+        \end{lstlisting}
+\end{figure}
+
+\section{Configuration for Node A}
+
+\begin{figure}[!ht]
+    \centering
+        \begin{lstlisting}[style=htmlcssjs, label=lst:pattern_config_file_extended, caption=pattern configuration for the first measurement execution ,captionpos=b]
+{
+  "totalPatternRequests": 100,
+  "patterns": [
+    {
+      "name": "CTL",
+      "sequence": [
+        {
+          "operation": "CONTROL",
+          "output": "item",
+          "wait": 15
+        }
+      ],
+      "weight": 25
+    },
+    {
+      "name": "INF",
+      "sequence": [
+        {
+          "operation": "INFO",
+          "output": "item",
+          "wait": 15
+        }
+      ],
+      "weight": 25
+    },
+
+
+    {
+      "name": "CRE",
+      "sequence": [
+        {
+          "operation": "CREATE",
+          "output": "item",
+          "wait": 15
+        }
+      ],
+      "weight": 25
+    },
+		{
+      "name": "REA",
+      "sequence": [
+        {
+          "operation": "READ",
+          "input": "item",
+          "output": "item",
+          "wait": 15
+        }
+      ],
+      "weight": 25
+    },
+		{
+      "name": "AUTH",
+      "sequence": [
+        {
+          "operation": "AUTHENTICATE",
+          "input": "item",
+          "output": "item",
+          "wait": 15
+        }
+      ],
+      "weight": 25
+    },
+		{
+      "name": "VAL",
+      "sequence": [
+        {
+          "operation": "VALIDATE",
+          "input": "item",
+          "output": "item",
+          "wait": 15
+        }
+      ],
+      "weight": 25
+    },
+
+    {
+      "name": "LST",
+      "sequence": [
+        {
+          "operation": "SCAN",
+          "output": "resourceList",
+          "wait": 15
+        }
+     ],
+      "weight": 25
+    },
+		{
+      "name": " UPD",
+      "sequence": [
+        {
+          "operation": "UPDATE",
+          "input": "item",
+          "wait": 5
+        }
+      ],
+      "weight": 25
+    },
+    {
+      "name": "DEL",
+      "sequence": [
+        {
+          "operation": "DELETE",
+          "input": "item",
+          "wait": 5
+        }
+      ],
+      "weight": 25
+    }],
+
+  "manualDecision": true
+}
+        \end{lstlisting}
+\end{figure}

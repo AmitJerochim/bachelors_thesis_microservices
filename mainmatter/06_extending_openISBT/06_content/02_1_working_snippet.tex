@@ -1,0 +1,25 @@
+\begin{figure}
+    \centering
+        \begin{lstlisting}[style=htmlcssjs, label=lst:improving_scan_working_oas_example, caption=Snippet of an OpenAPI document in YAML defining a service that maps to SCAN ,captionpos=b]
+ 1         ...
+ 2       "/users":
+ 3        "get":
+ 4          "responses":
+ 5            '200':
+ 6              "content":
+ 7                "application/json":
+ 8                  "schema":
+ 9                    "type": array
+10                     "items": 
+11                       $ref: '#/components/schemas/User'
+12        ...
+13        "components":
+14              "schemas":
+15                "User":
+16                  "type": object
+17                  "properties":
+18                    "name":
+19                      "type": string
+20        ...          
+        \end{lstlisting}
+\end{figure}

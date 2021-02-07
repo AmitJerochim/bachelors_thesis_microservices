@@ -1,0 +1,29 @@
+\subsection{Design and Architecture}
+\label{sec:eval_tool:design_and_architecture}
+
+To satisfy measurement design and tools' requirements, we need a suitable tool's architecture. OpenISBT provides a command-line interface, which requires plain text files as input and returns a text stream to the command-line's standard output, which we can pipe to other programs. 
+
+This behavior reminds of the Unix philosophy summarized by Douglas McIlroy: \blockquote{
+Write programs that do one thing and do it well. Write programs to work together. Write programs to handle text streams, because that is a universal interface
+}\cite[quoted in ][]{a_quarter_century_of_unix}. Therefore, the pipe and filter architecture is highly suitable for building a tool that wraps openISBT, and itself only handles text streams. 
+
+Figure \ref{fig:architecture_of_eval_tool} shows a workflow representing the tool's pipe and filter architecture. It consists of several independently executable components (also called filters) represented by the orange boxes. 
+Each filter uses text streams as input and returns text streams as output. The solid arrows represent the connectors between two filters (also called pipes) and show the program flow. The parallelograms stand for plain text files or directories containing plain text files on the file system that store input and output data. The dashed arrows represent the data flow from a filter to a file or directory and vise versa. Some input/output is connected to multiple filters across the workflow, and for better readability, some parallelograms occur twice. The figure only shows a subset of the data flow, for instance, the entire output to the OpenAPI files directory and many less important logging files.
+
+\input{mainmatter/05_evaluation/05_content/04_1_design_diagram}
+
+\subsubsection{Components for OpenAPI Document Processing}
+We implement several components to handle and analyze OpenAPI documents. We require most of them to detect repetitive patterns for later investigation of the dataset. Metrics' determination requires only a single component that transforms each OpenAPI document into a shorter and more lightweight representation of the API description to speed up the calculation time. OpenAPI documents provide plenty of information about their service operations, and processing the information requires computation resources and computation time. For metrics' determination, only the URI and the HTTP method of a service operation are required, but we require them multiple times. Using a representation, which only contains this information, reduces the calculation time by six.
+
+
+\subsubsection{Components for Data Cleaning}
+Sections \ref{sec:cleaning_data} and \ref{sec:eval_tool:general_considerations} discuss how each component cleans data and why.  However, they do not discuss how interdependencies between components can lead to wrong results if the components' order in figure \ref{fig:architecture_of_eval_tool}  changes. 
+For example, assuming the API description of a toy API defines nested resources only. 
+We first discard it as toy API, and the second cleaning component does not apply. If we first remove the document because it does not define top-level resources, we would not recognize that it is a toy API and include it in the subsequent metrics' determination. The same applies to OpenAPI documents, which openISBT cannot process without throwing exceptions.   
+
+
+\subsubsection{OpenISBT Wrapper}
+The OpenISBT Runner is a wrapper for OpenISBT, which takes a configuration file and a set of OpenAPI files and runs the openISBT MatchingTool for each OpenAPI file. For each OpenAPI file, it redirects the output that openISBT writes to stdout into a new log file. It checks if openISBT returned output to stderr, i.e., if it threw an exception. In that case, it logs the stack trace into another log file and associates specific input files to the stack trace. Also, the openISBT Runner records its own steps and so ensures understandability. 
+
+\subsubsection{Components for Metrics' Determination}
+We implement several filters for metrics' determination. First, we implement filters to determine $p_i$ for all kept files for both cases when considering and ignoring nested resources and filters to determine metrics for files, which only define nested resources and files that cause exceptions. Next, we implement a filter to determine the distribution of abstract operations across all service operations. Finally, we implement a filter, which aggregates the data and calculates $p_{operations}$ and $p_{APIs}$, as section \ref{sec:eval_tool:deriving_coverage_criteria} and the algorithms in Appendix \ref{appendix:A} describe, and prints a summary. 

@@ -1,0 +1,33 @@
+\section{Improving Existing Matching Units}
+\label{sec:extending:improving_existing_matching_units}
+
+The data investigation shows that several unsupported service operations are READ, or SCAN operations in essence. This section describes our findings and how we changed the matching units to support more service operations.  
+
+\subsection{Improving the READ Matching Unit}
+READ describes an abstract operation where a client requests a single resource's representation from the server without changing its state \cite[][sec. 3]{paper_grambow_benchmarking_microservices}. Best practices for resource identification are to use path parameters with unique identifiers.
+The path parameter enables the implementation of a single route to request different resources of the same type,e.g., GET /users/{user\_id}. In this example, the curly braces indicate the path parameter. This syntax is very common in many frameworks, e.g., FastAPI\footnote{\url{https://fastapi.tiangolo.com/tutorial/path-params/}},or JAX-RS\footnote{\url{https://docs.jboss.org/resteasy/docs/1.0.1.GA/userguide/html/JAX-RS_Resource_Locators_and_Sub_Resources.html}}. Other frameworks may use different syntax to indicate path parameters. For instance, Express.js\footnote{\url{https://expressjs.com/en/guide/routing.html}} uses a colon to identify path parameters. 
+According to the OpenAPI specification, using curly braces for path parameters is mandatory.
+Nonetheless, if a service provider only uses OpenAPI for documentation purposes, they frequently use colons to indicate path parameters. 
+Even if an OpenAPI document does not entirely conform to the OpenAPI specification, openISBT can still generate a service-specific workload for the service. To increase portability, we extend the matching unit for matching service operations if a colon is used instead of curly braces in the path parameter's declaration.
+
+
+\subsection{Improving the SCAN Matching Unit} 
+The abstract operation SCAN should map to a CRUD READ operation, which returns a list of objects \cite[][sec. 3]{paper_grambow_benchmarking_microservices}. According to the second level of RMM, a service operation, which implements a CRUD READ operation, should use HTTP GET as reading is safe and idempotent. Also, the response body should contain a collection of objects.
+For any service operation, we find the response body's data type in its data model (also called schema).
+
+
+Listing \ref{lst:improving_scan_working_oas_example} shows a code snippet of an exemplary OpenAPI document defining the service operation GET /users. 
+The code at lines 2-11 shows the operation's definition, and the code at lines 13-19 defines reusable components. In short, the server responds to such a request with HTTP status code 200 in the response's header and a JSON object in the response's body, which conforms to the data model (schema) in lines 8-11.
+
+In the following, we focus on the data model. The code at line 9 defines the data type as an array. According to the OpenAPI specification, a data model of type array also requires the items property defined in lines 10-11. The \$ref at line 11 refers to a \textit{User} data model defined in lines 15-19. Line 16 defines that the  \textit{User} is of type object, and lines 17-19 defines its properties, i.e., the name property.
+
+\input{mainmatter/06_extending_openISBT/06_content/02_1_working_snippet}
+
+\input{mainmatter/06_extending_openISBT/06_content/02_2_not_working_snippet}
+
+If the unit responsible for matching operations to SCAN inspects this service operation, it first checks if the HTTP method is GET. Then it checks if the data type at line 9 is an array. As both conditions are true, it matches the service operation to SCAN. 
+In Listing \ref{lst:improving_scan_not_working_oas_example}, we rewrite the example in Listing \ref{lst:improving_scan_working_oas_example} without changing the semantics, i.e., the snippet still describes the same operation.  
+The code at line 9 of Listing  \ref{lst:improving_scan_not_working_oas_example} refers to a \textit{Users}-schema in lines 18-21, which is an array of \textit{User}-objects defined in lines 13-17.
+
+The matching unit now detects \textit{schema}-object with property \textit{type} set to null and therefore does not match the operation to SCAN. However, it is semantically the same service operation.
+The OpenAPI specification enables componentization for many object types such as responses, data models, or parameters. The scenario above is manageable, but service providers use deeper nesting of components. To handle any nesting depth, we modify the matching unit to recursively resolve all references before it checks if the data type of the response is an array.   

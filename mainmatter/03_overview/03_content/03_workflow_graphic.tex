@@ -1,0 +1,84 @@
+\newcommand{\AsymCloud}[3]{
+\begin{scope}[shift={#1},scale=#3]
+\filldraw[fill=white, draw=black] (-1.6,-0.7) .. controls (-2.3,-1.1)
+and (-2.7,0.3) .. (-1.7,0.3)coordinate(asy1) .. controls (-1.6,0.7)
+and (-1.2,0.9) .. (-0.8,0.7) .. controls (-0.5,1.5)
+and (0.6,1.3) .. (0.7,0.5) .. controls (1.5,0.4)
+and (1.2,-1) .. (0.4,-0.6)coordinate(asy2) .. controls (0.2,-1)
+and (-0.2,-1) .. (-0.5,-0.7) .. controls (-0.9,-1)
+and (-1.3,-1) .. cycle;
+\node at ($(asy1)!0.5!(asy2)$) {#2};
+\end{scope}
+}
+
+
+\tikzset{
+    io/.style={
+    trapezium,
+    trapezium left angle=70,
+    trapezium right angle=110,
+    minimum width=2cm,
+    minimum height=0.7cm,
+    text centered,
+    draw=black,
+    fill=blue!30
+    },
+    activity/.style={
+    rectangle,
+    draw=black,
+    minimum width=3cm,
+    minimum height=0.7cm,
+    text centered,
+    text width=3cm,
+    draw=black,
+    fill=orange!30
+    },
+    box/.style={
+    rectangle,
+    draw=black,
+    minimum width=4cm,
+    minimum height=5cm,
+   % text centered,
+    text width=3.5cm,
+    draw=black,
+    very thick
+    }
+}
+\begin{figure}
+\hspace*{-1cm}
+    \centering
+       \begin{tikzpicture}
+     %% legend
+        \node[box] at (13.5,0){};
+        \node at (13.5,2) {Legend:};
+        \node[io] (legend io) at (13.5,1) {input/output};
+        \node[activity] (activity) at (13.5,0) {activity};  
+        \path[->, dashed] (12,-2) edge node[above]{data flow} (15,-2);
+        \path[->] (12,-1.2) edge node[above]{sequence flow} (15,-1.2);
+     %% workflow
+        \node[io] (files) at (8,0) {OAS files};
+        \node[activity] (collectData) at (4, 0) {collecting data};  
+        \path[->, dashed] (0,0) edge (collectData);
+        \path[->, dashed] (collectData) edge (files);
+        \AsymCloud {(0,0)}{SwaggerHub}{1};
+        \node[activity] (analysis1) at (3, -4) {executing measurement};
+        \node[io] (stat1) at (3, -8) {statistics};
+        \node[activity] (implement) at (8, -4) {extending openISBT};
+        \node[activity] (analysis2) at (13, -4) {executing measurement};
+        \node[io] (stat2) at (13, -8) {statistics};
+        \node[activity] (compare) at (8, -8) {comparing statistics};
+  
+        \path[->, dashed] (files) edge (analysis1);
+        \path[->, dashed] (files) edge (analysis2);
+        \path[->, dashed] (analysis1) edge (stat1);
+        \path[->, dashed] (analysis2) edge (stat2);
+ %       \path[->] (analysis1) edge (stat1);
+  %      \path[->, dashed] (analysis2) edge  (stat2);
+        \path[->] (analysis1) edge (implement);
+        \path[->] (implement) edge (analysis2);
+        \path[->, dashed] (stat1) edge (compare);
+        \path[->, dashed] (stat2) edge (compare);
+    \end{tikzpicture}
+    \caption{General structure of the experiment}
+    \label{fig:structure_of_the_experiment}
+\end{figure}

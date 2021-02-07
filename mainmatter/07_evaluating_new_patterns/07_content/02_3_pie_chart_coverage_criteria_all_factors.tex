@@ -1,0 +1,60 @@
+\begin{figure}
+\centering
+\begin{subfigure}[t]{.48\textwidth}
+  \centering
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%% OPERATIONS %%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    \begin{tikzpicture}
+        \pie[ 
+            /tikz/every pin/.style={align=left},
+            sum=auto,
+            radius=2,
+            text=pin,
+            rotate=120,
+            before number=\phantom,
+            after number=,
+            color={red!70,blue!70}
+            ]{
+            14.850/$\textbf{Not supported}$\\ (59.7\%),
+            10.009/$\textbf{Supported}$\\ (40.3\%)
+            };
+            \node[] at (0.6, 0.7){10009};
+            \node[] at (-0.6,-0.7){14850};
+    \end{tikzpicture}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+  \caption{OpenISBT was able to match 10009 of 24859 Operations across all APIs}
+  \label{fig:analysis2_sub_pie_coverage_sup_operations_all_factors}
+\end{subfigure}%
+\hfill
+\begin{subfigure}[t]{.48\textwidth}
+  \centering
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%% APIs %%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    \begin{tikzpicture}
+        \pie[ 
+            /tikz/every pin/.style={align=left},
+            sum=auto,
+            radius=2,
+            text=pin,
+            rotate=90,
+            % before number=\phantom,
+            % after number=,
+            color={red!70,blue!70}
+            ]{
+            1159/$\textbf{Not fully}$ \\$\textbf{supported}$ \\ (75.6\%),
+            375/$\textbf{fully supported}$\\ (24.4\%)
+            }
+    \end{tikzpicture}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+  \caption{For 375 of 1534 APIs openISBT could match all operations}
+  \label{fig:analysis2_sub_pie_coverage_full_sup_apis_all_factors}
+\end{subfigure}%
+\caption{Both coverages we determined for a set of 1534 APIs and 24859 operations}
+\label{fig:analysis2_pie_both_criteria_all_factors}
+\end{figure}

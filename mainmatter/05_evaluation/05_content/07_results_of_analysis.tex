@@ -1,0 +1,30 @@
+\subsection{Results of the Measurement}
+\label{sec:analysis_1:results}
+
+Before we introduce measurement results, i.e., the different metrics and the abstract operations' distribution,  we introduce the sample's composition, i.e., the data cleaning results. 
+\input{mainmatter/05_evaluation/05_content/07_1_pie_chart_cleaning}
+\FloatBarrier
+Figure \ref{fig:pie_chart:shares_of_removed_apis_before_extention} shows it as a pie chart. We pass the evaluation tool 2069 OpenAPI documents.
+We identify 372 OpenAPI documents, which describe toy APIs. We consider 297 of them as toy APIs as they are too short, i.e., they have less than 100 LOC. The other 75 documents are templates, which SwaggerHub provides. Also, we detect 163 OpenAPI documents, which the evaluation tool cannot process because they define general path-properties. 
+
+We also detect 303 OpenAPI documents, which openISBT cannot handle without throwing an exception. Furthermore, we detect 50 OpenAPI documents, which openISBT cannot handle since the documents only define operations on nested resources.
+
+We know by observation that the sample contains 158 template documents, but as we mention above, we only identify 75 template documents. Furthermore, we do not identify any document with a missing paths-property, but we know by observation that the sample contains 15 such documents. Interdependencies mentioned in section \ref{sec:eval_tool:design_and_architecture} are the reason for this. However, we ensure that these interdependencies do not affect results correctness. 
+
+\input{mainmatter/05_evaluation/05_content/07_2_pie_chart_coverage_main}
+Figure \ref{fig:analysis1_pie_both_criteria_main} shows two pie charts visualizing the coverage metrics.
+Pie chart \ref{fig:analysis1_sub_pie_coverage_sup_operations_main} shows the shares of supported and unsupported service operations. Supported service operations can be successfully matched to an abstract operation by the openISBT matching tool, and unsupported operations cannot. In other words, the share of the supported operation in the pie chart is the metric $p_{operations}$. The chart mainly expresses that openISBT can match 10009 of 13310 service operations to abstract operations, i.e., the coverage $p_{operations}$ is equal to $75.2\%$.
+
+Figure \ref{fig:analysis1_sub_pie_coverage_full_sup_apis_main} shows the shares of fully supported APIs as a pie chart. 
+Fully supported means that openISBT supports all service operations an API defines.
+Therefore, the relative share of the fully supported APIs of 41.4\% is the coverage metric $p_{APIs}$.
+
+The cleaned sample of documents both pie charts refer to includes 1181 OpenAPI documents and 13310 service operations on top-level resources. 
+\input{mainmatter/05_evaluation/05_content/07_3_pie_chart_operation_types}
+Beyond calculating coverage metrics, we also determine the distribution of the abstract operations, i.e.,  how often openISBT matches each abstract operation. Figure \ref{fig:analysis1:pie_chart_shares_of_operation_types} shows the shares of each abstract operation. 
+If a service operation is not supported, then the abstract operation is undefined yet. 
+Therefore, the slice UNDEFINED contains all the unsupported service operations.
+We also notice that openISBT matches 4706 service operations (35.35\%) to the abstract operation CREATE, which is significantly higher than the other operations. 
+
+
+\input{mainmatter/05_evaluation/05_content/08_results_larger_scope}

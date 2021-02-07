@@ -1,0 +1,17 @@
+\section {Designing a Web Crawler}
+\label{sec:designing_a_web_crawler}
+Understandably, a web crawler cannot stand for itself and requires a website to crawl data from.
+The company SmartBear offers a SaaS solution for service providers to design and maintain APIs. It also allows service providers to manage, host, and distribute interface descriptions of their APIs. 
+As this tool has a web interface designed for humans, we implement a web crawler to automate repeatable user interactions and collect 2069 OpenAPI documents.
+\newline
+The web crawler proceeds with four steps in order to collect the documents:
+\begin{enumerate}
+    \item It creates a WebDriver instance and configures it.
+    \item Afterward, it searches for APIs performing HTTP requests and saves responses as HTML files.
+    \item Then it reduces the HTML files to a single file containing all URLs we want to request.
+    \item Finally, it checks for each API whether its API description is valid and, if so, it downloads it.  
+\end{enumerate} 
+
+
+
+

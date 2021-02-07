@@ -1,0 +1,23 @@
+%!TEX root = ../thesis.tex
+
+%This is the Summary
+%%=========================================
+\cleardoublepage
+\addcontentsline{toc}{section}{Abstract}
+\section*{Abstract}
+
+Benchmarking serves to improve the non-functional properties of IT-systems. Designing a portable benchmark for microservices is difficult as they do not share a common interface. 
+In this work, we evaluate the applicability of openISBT, a proof-of-concept prototype of a portable and pattern-based benchmarking approach for REST-based microservices, described in a machine-understandable way. OpenISBT allows developers to model interaction patterns as sequences of abstract operations and define abstract workload on them. It maps specific service operations to abstract operations using matching units and generates service-specific workload. We determine the coverage of service operations and APIs that openISBT can map and determine abstract operations' distribution for samples of more than a thousand interface descriptions. We also derive new abstract operations from a dataset of interface descriptions, implement new matching units, and contribute to existing matching units. Therefore, we implement a web crawler to collect open source interface descriptions and a prototype to measure the coverage metrics.
+Our work shows that openISBT supports  41.4\% of the APIs and 75.2\% of the service operation in the dataset. Our contributions to openISBT increase the coverage of supported APIs to 48.8\% and the coverage of supported services operations to 82.3\%. 
+
+\newpage
+\addcontentsline{toc}{section}{Zusammenfassung}
+\section*{Zusammenfassung}
+
+Benchmarks dienen der Verbesserung nichtfunktionaler Eigenschaften von IT-Systemen. Der Entwurf eines portablen Benchmarks für Microservices ist jedoch problematisch, da diese keine Standardschnittstelle teilen. 
+In dieser Arbeit untersuchen wir die Anwendbarkeit von openISBT, einen Prototypen eines auf Interaktionsmustern basierenden Ansatzes, um Microservices mittels Benchmarks zu messen. Diese müssen REST-basiert sein und es muss für sie eine Schnittstellenbeschreibung existieren.
+OpenISBT erlaubt Entwicklern Interaktionsmuster als Sequenzen abstrakter Operationen zu modellieren und abstrakte Last für jene Interaktionsmuster zu definieren. Der Prototyp bildet spezifische Services auf abstrakte Operationen ab und kann so service-spezifische Last generieren.
+Wir bestimmen anhand verschiedener Stichproben mit je einem Umfang von über eintausend Schnittstellenbeschreibungen die Abdeckung von service-spezifischen Operationen und Schnittstellen, die openISBT abbilden kann. Außerdem bestimmen wir die Verteilung service-spezifischer Operationen auf die abstrakten Operationen. 
+Darüber hinaus leiten wir aus dem Datensatz neue abstrakte Operationen ab und entwerfen und implementieren Komponenten, die service-spezifische Operationen auf die neuen abstrakten Operationen abbilden. Wir verbessern außerdem die Funktionalität bestehender Komponenten. 
+Hierfür entwickeln wir jeweils einen Prototypen, um Schnittstellenbeschreibungen zu sammeln und um Abdeckungsmetriken zu bestimmen. 
+Unsere Arbeit zeigt, dass openISBT 41.4\% der untersuchten Schnittstellen voll unterstützt und  75.2\% der service-spezifischen Operationen unterstützt. Durch unsere Erweiterungen steigerten sich die Abdeckung der voll unterstützten Schnittstellen auf 48.8\% und die Abdeckung der service-spezifischen Operationen auf 82.3\%.

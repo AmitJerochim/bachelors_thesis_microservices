@@ -1,0 +1,6 @@
+\section{Outlook and Future Research}
+\label{sec:discussion_outlook}
+OpenISBT is subject to continuous changes. Our work shows that unwanted behavior occurs because of the lack of test cases (see sections \ref{sec:analysis1:larger_context_of_applicability}, \ref{sec:extending:improving_existing_matching_units}, \ref{sec:discussion_limitations_implementation}). The evaluation tool we present in section \ref{sec:eval_tool:overview_design} cannot find any unexpected behavior, but associates caught exceptions to OpenAPI documents. Furthermore, it aggregates them and allows developers to find issues in the code so that future contributors can use the tool in the development process. 
+
+We also show that openISBT matches service operations wrongly if they do not follow the second level of Richardson’s maturity model. Therefore, we use an assumption-based detection tool to estimate false-positive errors.
+Future researchers could determine the exact ratio of false-positive ratios and either re-implement the CREATE matching unit or propose an approach to detect Richardson’s maturity level of OpenAPI documents.

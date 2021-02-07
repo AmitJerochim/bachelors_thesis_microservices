@@ -1,0 +1,103 @@
+
+
+% \subsection{Defining Design Objectives}
+% \label{sec:defining-design_objectives}
+% According to the previous section our goal was to design and implement a tool which calculates \(p_{operations}\) as indroduced in \ref{eq:all_apis_operations} and \(p_{APIs}\) as introduced in \ref{eq:all_full_supported_apis} for a given set of OpenAPI files. Beyond the calculation itself we already early agreed on a set of design objectives that our tool has to fullfill: 
+
+% \begin{itemize}
+%     \item \textbf{Reproducibility:} relies on the closeness of the agreement between the results of successive measurements under the same condition and is in general a minimum requirement. In fact, as we only handle UTF-8 encoded files the results of identical measurement should not be just close but either identical.
+%     We extend this design objective not only to be reproducible but to be easily reproducible, i.e., setting up the experiment should be fast for everybody with minimal effort, few resources and no deep understanding of how the tool actually works
+%     \item \textbf{Portability:} means for our case it should be designed to take any set of openAPI files as input and evaluate for each set as many files as possible. Nevertheless, portability does not force us to design the tool to evaluate every file in a set of files under any circumstances, e.g., before we performed our actual measurements as described in later sections we used our tool to also filter our set of OpenAPI files so that we at least strongly decrease the the amount of toy APIs in the subset of evaluated files.
+%     \item \textbf{Usability:} We introduced in \ref{sec:deriving_coverage_criteria} two coverage criteria and a user might not want to run bot. We also mentioned when explaining the portability design objective that we filtered undesired input using the tool. Therefore the tool should be designed to be customizable and for that it should be easy to use in a way that the tool should be self-explanatory without further reading. Therefore misuse of the tool should not lead into false results but rather return a self-explanatory error message that indicate a right usage scenario.
+%     \item \textbf{Understandability:} as the last design objective means that our tool should not only deliver a result but also explain every step toward the calculation of a particular result so that it can be verified by examining the loggings of our tool. Therefore our tool should log for each file:
+%     \begin{itemize}
+%         \item if it could be evaluated and if not then why
+%         \item and if has been evaluated then how it did influenced the results.
+%     \end{itemize}
+% \end{itemize}
+
+
+\subsection{Defining Tasks For Our Evaluation Tool}
+\label{sec:defining-tasks}
+As we already mentioned the purpose of the tool is mainly to calculate \(p_{operations}\) and \(p_{APIs}\) for a set of OpenAPI files and therefore we start with two main tasks that our tool should take care of:
+\begin{enumerate}
+    \item Take set of OpenAPI files as input and calculate \(p_{operations}\) 
+    \item Take set of OpenAPI files as input and calculate \(p_{APIs}\)
+\end{enumerate}
+
+For both the tool needs to be able to calculate \(p_{i}\) for a microservice \(i\). We achieve this by breaking the calculation of \(p_{i}\) into a sequence of four steps as shown in algorithm \ref{alg:calc_p_i_for_single_api}. \\
+
+\begin{algorithm}[H]
+\LinesNumbered
+\SetKwInOut{Input}{input}
+\SetKwInOut{Output}{output}
+\Input{OpenAPI file}
+\Input{Pattern configuration file}
+\Output{ \(p_{i}\)  }
+    ALL\_OPERATIONS = Count all operations listed in the OpenAPI file\;
+    Try to bind the abstract interaction patterns to operations in the OpenAPI file\;
+    SUPPORTED\_OPERATIONS = Count the supported operations\;
+    \(p_{i}\) = SUPPORTED\_OPERATIONS divided by ALL\_OPERATIONS 
+ \caption{Calculate coverage criteria \(p_{i}\) for a single API}
+ \label{alg:calc_p_i_for_single_api}
+\end{algorithm}
+
+We can use algorithm \ref{alg:calc_p_i_for_single_api} to calculate \(p_{APIs}\) as shown in algorithm \ref{alg:calc_p_apis} and to calculate \(p_{operations}\) as shown in algorithm \ref{alg:calc_p_operations} we referred in \ref{app:algorithms_of_the_evaluation_tool} since they are both an algorithmic description of the equations in section \ref{sec:deriving_coverage_criteria}.
+
+The mathematical considerations behind algorithm \ref{alg:calc_p_i_for_single_api} do not seem to be very challenging. Nonetheless the algorithm introduces a set of unsolved problems we have not discussed yet:
+
+\begin{enumerate}
+
+    \item We start with the restriction that the openISBT prototype can not handle nested resources in it's current version and merely ignores them.
+    \item For our experiment we implemented a web crawler that only collects validated OpenAPI files. Nevertheless, the tool should be designed to handle every set of files including invalid OpenAPI files, or files that are valid but do not fullfill certain requirements, e.g., determine toy APIs during evaluation and discard them.
+    \item OpenAPI files vary in their syntax as well as their semantics, e.g., a file might define an operation, which is deprecated, or only define nested resources. On the one hand, such problems add complexity to our design, but on the other hand they leads into trade-offs and decisions that have to be make, e.g., should it take nested resources into account when running the measurement and if we decide it should not and an arbitrary OpenAPI file \(i\) only defines nested resources should it be discarded, since keeping it in the evaluation process will lead into paradoxical increase of \(p_{APIs}\), as our tool then is forced to illegally calculate \(p_i = \frac{|M_i|}{|N_i|} = \frac{0}{0} = 1\)?
+    \item In line two we obviously make use of the openISBT prototype. In other words we add a dependency to our tool that is neither tested on a large set of input files nor we fully understand nor we can change.
+    Therefore, our tool has to handle any kind of unexpected behaviour of the tool, which lead to additional trade-offs, e.g., if an OpenAPI file \(i\) fits to all our requirements and theoretically defines operations that should be bound successfully but still leads to unexpected behaviour, then should it be discarded before measurement of either be included in our measurement as \(p_i = \frac{|M_i|}{|N_i|} = \frac{0}{|N_i|} = 0\)?
+\end{enumerate}
+
+% Therefore we derive additional tasks to address these problems and to also fullfill the design objectives we explained in \ref{sec:defining-design_objectives}. We divided the tasks into five categories and explained them in Table \ref{tab:derived_tasks}. We use the term binding to refer to the process of binding abstract interaction patterns to concrete operations of an API and so we call the phase before the binding pre-binding-phase and the phase after binding but before our measurements post-binding-phase. The measuring-tasks are divided to our main analysis that we explained in \ref{sec:deriving_coverage_criteria} and additional analysis that is required to discuss our results in later chapters.
+
+% \subsubsection{Pre-Binding-Phase}
+% Before our tool can do the binding there are several cleaning and transforming steps to be done.
+% \paragraph{Discard non-production OAS files}
+% As we want to analyse only APIs used in production we have to remove all other APIs before doing our analysis , what as a matter of fact would result in a manual research and investigation for each file. As this seems to be infeasible for large sets we needed find criteria to implement automated discarding to at least reduce non-production data. We made a hard assumption that short OAS file is probably not used in production. This approach results in a trade-off as we on the one hand might discard small APIs used in production but on the other hand might miss out non-production APIs. Nonetheless, we decided that reducing our    
+
+
+% \paragraph{Read the OAS files and format them}
+% Typically OAS files include very complex and nested structures for each operation to define all necessary information for a clients stub and the OpenISBT prototype requires this Information to bind abstract interaction patterns to any operation. Nevertheless, after the binding our tool needs to repeatedly process a very small amount of this information, i.e., the required  information only include whether an operation is deprecated or not, as well as the URI and HTTP method of each operation. To avoid waste of computing resources it should process the OAS file only once to create a less resources consuming representation of it.     
+
+
+% \paragraph{Discard unsuitable OAS files}
+% To analyse an OpenAPI f process ile we require a paths object containin a very small amount of this information. To avoid e resources and therefore require an a file with a structure similar the one we referred in listing \ref{lst:example_suitably_formated_oas_file}. As we explained in section \ref{sec:background_open_api} OpenAPI allows developers to reduce code duplication reusing common parameters defined as components and as a matter of fact swaggerhub considers the OpenAPI file we referred in listing \ref{lst:example_unsuitable_but_valid_oas_file} is valid. As it does not possesses an paths object our tool has to discard those files before doing going to the next step. 
+
+% \input{tab/042_valid_oas_files_example}
+
+% \subsubsection{Binding-phase}
+% The binding phase start when we start to interact with the openISBT prototype.
+
+% \paragraph {Redirect loggings}
+% When executing the openISBT prototype among others logs several information to the console. As our own tool should retrieve this information repeatedly as it does with the OAS file and the binding is also very resource intensive our tool should redirects the logs to a file and retrieve the information later from there.
+% \paragraph {Handle Exceptions}
+% For some inputs the openISBT throws Exception and prints the stack trace to the stderr. For each file where an Exception is thrown the tool should log the exception and associate it with file names. The decision if the file will be used or dicarded though happens in the post-binding-phase.
+
+
+% \subsubsection{Post-Binding-phase}
+% The binding phase start when we start to interact with the openISBT prototype.
+% \paragraph {Redirect loggings}
+% remove corrupt log files
+% \paragraph {Handle Exceptions}
+% remove sample APis
+
+% \subsubsection{Analysis and Conclusion}
+
+% \paragraph{Main analysis}
+
+% \paragraph{Additional Analysis}
+
+% \paragraph{Conclusion}
+% As the tool runs multiple analyses and for each analysis it logs every factor that influences the final result understanding the result might become very unhandy. In this step the tool reads all log files and summarieses them.
+% %\LTXtable{\textwidth}{tab/042_derived_tasks}
+% \begin{comment}
+
+
+% \end{comment}

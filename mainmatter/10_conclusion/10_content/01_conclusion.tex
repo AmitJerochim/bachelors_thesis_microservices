@@ -1,0 +1,20 @@
+%Avoiding Confusion in your Conclusion!
+%Many writers confuse the information they should include in their discussion with the information they should place in their conclusion. One easy way to avoid this confusion is to think of your conclusion as a summary of everything that you have said thus far. In the conclusion section, you remind the reader of what they have just read. Your conclusion should:
+
+%Restate your hypothesis or research question
+%-Restate your major findings
+%-Tell the reader what contribution your study has made to the existing literature
+%-Highlight any limitations of your study
+%-State future directions for research/recommendations
+
+%Your conclusion should NOT:
+%-Introduce new arguments
+%-Introduce new data
+%-Fail to include your research question
+%-Fail to state your major results
+Benchmarking serves to improve the non-functional properties of IT-systems. Designing a portable benchmark for microservices is difficult as they do not share a common interface. Martin  Grambow et al. present a pattern-based approach for defining portable and relevant microservices' benchmarks. Their approach defines abstract workload on interaction patterns, i.e., sequences of abstract operations, and maps service operations to generate service-specific workload. They present openISBT, a proof-of-concept prototype that is only evaluated against a few toy services. 
+
+In this work, we evaluated the applicability of openISBT for a large set of open source microservices APIs. We extended its applicability by deriving new abstract operations and implementing matching units. In particular, we implemented a web crawler, which automatically collects OpenAPI documents from swagggerhub.com and collected 2069 OpenAPI documents. 
+Also, we derived metrics to quantify applicability and designed and implemented an evaluation tool to measure these metrics for openISBT. Finally, we derived four abstract operations, implemented new matching units, and modified existing matching units. Our contributions to openISBT increased the coverage of fully supported APIs from 41.4\% to 48.8\% and the coverage of supported service operations from 75.2\% to 82.3\%. 
+
+We also discussed different limitations and stated future directions for research. First, we showed that several APIs do not follow the second level of Richardson's maturity model, so openISBT matches their service operations to wrong abstract operations. For instance, we found 957 possible service operations that do not use HTTP POST in a RESTful way. To reduce errors, reliable automation for detecting non-REST API is crucial. We also showed that the prioritization of abstract operations leads to errors. Matching units should rather rely on mutually exclusive properties of service operations. Next, openISBT only benchmarks REST API but not asynchronous APIs. We assume that extending openISBT for asynchronous APIs is possible with less effort by using AsyncAPI as IDL. Finally, we showed that malfunction occurs because of a lack of test cases and provided open source tools and data to improve the development process.

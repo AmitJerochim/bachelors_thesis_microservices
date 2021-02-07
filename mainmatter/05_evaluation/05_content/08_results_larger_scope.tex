@@ -1,0 +1,9 @@
+\subsection{The Larger Scope of Applicability}
+\label{sec:analysis1:larger_context_of_applicability}
+Determining the results above, we set focus on discovering missing abstract operations. Therefore, we ignore documents and service operations if openISBT does not support them for other reasons than undiscovered abstract operations. Figure \ref{fig:analysis1_pie_both_criteria_all_factors} visualizes the metrics as figure \ref{fig:analysis1_pie_both_criteria_main} but reflects any aspect of applicability.
+
+\input{mainmatter/05_evaluation/05_content/08_1_pie_chart_coverage_with_exceptions_and_subres}
+
+Therefore, it considers 1534 OpenAPI documents, which define 24859 service operations on top-level resources and nested resources.
+If openISBT cannot process an OpenAPI document without exception, or the OpenAPI document only defines nested resources, we count it as $p_i=0$. Figure  \ref{fig:analysis1_sub_pie_coverage_sup_operations_all_factors} shows a  much smaller coverage of 40.3\% for the supported service operations.
+Also, figure \ref{fig:analysis1_sub_pie_coverage_full_sup_apis_all_factors} shows a smaller coverage of 24.4\% for the fully supported APIs. 

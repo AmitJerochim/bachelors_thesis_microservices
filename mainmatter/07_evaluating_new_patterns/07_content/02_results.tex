@@ -1,0 +1,19 @@
+This chapter covers aspects of the second measurement execution for the extended openISBT version. It presents the results and compares them to the results of the previous measurement. 
+
+\input{mainmatter/07_evaluating_new_patterns/07_content/02_1_pie chart_coverage_criteria_main}
+
+We use an extended pattern configuration file for the measurement execution, which defines four new interaction patterns, each containing one new abstract operation. 
+Appendix \ref{app:results_data_cleaning2} shows that nine more OpenAPI documents cause exceptions in openISBT because of code changes.
+Therefore, we determine metrics for a smaller sample and can only compare relative values. 
+
+\input{mainmatter/07_evaluating_new_patterns/07_content/02_2_pie_chart_operation_types}
+
+The following metrics belong to a set of 1172 OpenAPI documents, which define 13233 service operations. Figure \ref{fig:analysis2_pie_both_criteria_main} shows two pie charts, which visualize the coverage metrics $p_{operations}$ and $p_{APIs}$. Figure \ref{fig:analysis2_sub_pie_coverage_sup_operations_main} shows that the extended openISBT version can match 10897 (82.3\%) service operations. Therefore, the coverage $p_{operations}$ is 7.1\% higher than in the first measurement execution (see figure \ref{fig:analysis1_sub_pie_coverage_sup_operations_main}).Figure \ref{fig:analysis2_sub_pie_coverage_full_sup_apis_main} shows that the extended openISBT version can match any operation in 572 (48.8\%) OpenAPI documents. 
+Comparing it to figure \ref{fig:analysis1_sub_pie_coverage_full_sup_apis_main}, we notice an increase of $p_{APIs}$ of 7.4\%.
+
+Figure \ref{fig:analysis2:pie_chart_shares_of_operation_types} shows the distribution of abstract operations as a pie chart. 
+Comparing it to the prior distribution in figure \ref{fig:analysis1:pie_chart_shares_of_operation_types}, we see that each value changed. However, for the abstract operations CREATE, UPDATE, and DELETE, the change is minimal and subject to the changed sample size.
+The decrease in the coverage of undefined operation is $\Delta p_{operations}$.
+There are representants for all new abstract operations in the sample.
+We see an increase in the coverage of the SCAN operation from 9.29\% to 10.32\%. 
+The coverage of the READ operation shows a decrease from 13.97\%  to 10.44\%. As the modifications to the matching units we describe in section \ref{sec:extending:improving_existing_matching_units} are not restrictive, we assume a shift from the READ operation to other abstract operations. 

@@ -1,0 +1,62 @@
+
+\begin{longtable}{ m{2.6cm} | m{4.4cm} | m{6.5cm} }
+\caption{Search syntax for SwaggerHub} 
+\label{tab:search_syntax_swaggerhub} \\
+
+\multicolumn{1}{c}{\textbf{Parameter}} & 
+\multicolumn{1}{c}{\textbf{Possible Values}} &
+\multicolumn{1}{c}{\textbf{Explanation}} \\ 
+\toprule
+\endfirsthead
+
+\multicolumn{2}{c}%
+{\tablename\ \thetable{} -- continued from previous page} \\ 
+\multicolumn{1}{c}{\textbf{Parameter}} &
+\multicolumn{1}{c}{\textbf{Possible Values}} & \multicolumn{1}{c}{\textbf{Explanation}} \\ 
+\toprule
+\endhead
+
+\midrule
+\multicolumn{2}{r}{{Continued on next page}} \\
+\endfoot
+
+\bottomrule
+\endlastfoot
+\hline
+Specification & 
+\begin{itemize}
+    \item OPENAPI3.0
+    \item SWAGGER2.0   
+\end{itemize} & 
+SwaggerHub hosts OpenAPI 2.0 formatted documents (formerly known as Swagger 2.0) and OpenAPI 3.0 formatted documents. Using this parameter, we can specify the required format.
+
+\\
+\hline
+Visibility & \begin{itemize}
+    \item PUBLIC
+    \item PRIVATE  
+\end{itemize} & 
+The visibility shows if a document is either private or public. Private means that a document is only visible to its owner and contributors. Public documents are visible to anybody, i.e., also to unregistered users.
+\\
+\hline
+State &
+\begin{itemize}
+    \item PUBLISHED
+    \item UNPUBLISHED  
+\end{itemize} &
+The state shows whether an API is ready for use in production or not. Setting the state to published signals that an API is stable and makes it also read-only.
+\\ 
+\hline
+Type & 
+\begin{itemize}
+    \item API
+    \item DOMAIN  
+\end{itemize} &
+The type shows whether a document is an API description or a domain. A domain is a library of common components used in multiple API descriptions, e.g., a user object's data model.  
+\\
+\hline
+Page & 
+Any page number starting with one & 
+SwaggerHub uses pagination to limit requested results. The client only gets the first ten items per request. Using this query string parameter, we can request additional items. \\
+
+\end{longtable}
