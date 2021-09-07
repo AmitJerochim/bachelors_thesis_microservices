@@ -1,7 +1,8 @@
 # Bachelor's Thesis
 
 This repository shows the latex project of my bachelor's thesis. 
-below you also find links to the prototypes that I implemented using java, bash, kotlin, and node.js.
+[Here's a link to the compiled bachelor's thesis PFD document](https://github.com/AmitJerochim/bachelors_thesis_microservices/blob/main/thesis.pdf)
+Below you also find links to the prototypes that I implemented using java, bash, kotlin, and node.js.
 
 ![frontpage of the thesis](https://github.com/AmitJerochim/bachelors_thesis_microservices/blob/main/frontpage.png)
 
